@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 5</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <nav class="nav-bar navbar-dark mb-5" style="background-color: #ff971d;">
+        <div class="container-fluid d-flex justify-content-between">
+            <a href="https://www.srmist.edu.in/" target="_blank"><img width="176px" height="59px" class="navbar-brand my-2 p-0" src="images/srmLogo.png"/></a>
+            <span class="navbar-text text-center">
+                <strong class="exp-title">Power Flow Analysis by Newton Raphson method</strong>
+            </span>
+            <button type="button" class="my-auto info" data-bs-toggle="modal" data-bs-target="#helpModal" title="Help"><i class="bi bi-info-circle"></i></button>
+        </div>
+    </nav>
+    <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Answer the following questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="question"></div>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="a" id="answer_a" name="answer">
+                            <label id="answer_a_label" class="form-check-label" for="answer_a">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="b" id="answer_b" name="answer">
+                            <label id="answer_b_label" class="form-check-label" for="answer_b">
+                            </label>
+                        </div>
+                    </div>
+                    <div id="comments">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="verifyInteractive()">Verify</button>
+                    <button id="nextQuestion" type="button" class="btn btn-primary" disabled onclick="next()">Next</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body help-body">
+                    <strong>To open this menu again click on <i class="bi bi-info-circle"></i> on the top right.</strong><br><br>
+                    <div>
+                        Formulae needed for the execution of power flow analysis using Newton Raphson method<br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn1.png" alt="Formula 1"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn2.png" alt="Formula 2"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn3.png" alt="Formula 3"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn4.png" alt="Formula 4"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn5.png" alt="Formula 5"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn6.png" alt="Formula 6"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn7.png" alt="Formula 7"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn8.png" alt="Formula 8"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn9.png" alt="Formula 9"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn10.png" alt="Formula 10"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn11.png" alt="Formula 11"><br>
+                        <img class="img-fluid" src="./images/Exp5_Eqn12.png" alt="Formula 12"><br><br>
+                        <strong>Losses</strong><br>
+                        Power losses in the (i – k)<sup>th</sup> line = S<sub>ik</sub> + S<sub>ki</sub>.<br>
+                        Total transmission losses can be computed by summing all the line flows (i.e., S<sub>ik</sub> + S<sub>ki</sub> for all i, k).<br>
+                        It may be noted that the slack bus power can also be determined by summing the power flows on the lines terminating at the slack bus.<br><br>
+                    </div>
+                    <br>
+                    <br>
+                    <table class="table table-striped">
+                        <thead class="sticky">
+                            <tr>
+                                <th scope="col">
+                                    Field   
+                                </th>
+                                <th scope="col">
+                                    Explanation
+                                </th>
+                                <th scope="col">
+                                    General Range
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Number of buses</td>
+                                <td>A bus is a junction (or node) where a line or several lines are connected and may also include several components such as loads and generators in a power system network</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Number of PV buses (including slack bus)</td>
+                                <td>Number of PV buses present in the network. Where, the PV bus is also known as generator bus, voltage-controlled bus, represents the generator stations found in a power system network</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Number of PQ buses</td>
+                                <td>Number of PQ buses present in the network. Where, the PQ bus is also known as load bus, represents the real and reactive power consumed in a power system network</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Number of transmission lines</td>
+                                <td>Number of transmission line present in the network. Where, a transmission line used to transmit electric power over relatively long distances, usually from a central generating station to main substations</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Number of transformers</td>
+                                <td>Number of transformer present in the network. Where, a transformer is an electrical equipment that transfers electric power from one circuit to another circuit without changing the frequency</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3" class="text-center">SLACK BUS</th>
+                            </tr>
+                            <tr>
+                                <td>Id of slack bus</td>
+                                <td>Identification number of the slack bus to be entered. Where, slack bus is a reference bus or swing bus</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Maximum number of iterations</td>
+                                <td>Iteration is the repetition of a process in order to generate an outcome. Each repetition of the process is a single iteration, and the outcome of each iteration is then the starting point of the next iteration</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Convergence tolerance for voltage difference in per unit</td>
+                                <td>Convergence is the state when all buses have met the mismatch tolerance. In this method the voltage updates one bus at a time until all buses are within the mismatch tolerance</td>
+                                <td>0.0001 p.u. to 0.001 p.u.</td>
+                            </tr>
+                            <tr>
+                                <td>Base MVA</td>
+                                <td>Base Mega Volt Ampere</td>
+                                <td>100 to 600 MVA</td>
+                            </tr>
+                            <tr>
+                                <td>Acceleration factor</td>
+                                <td>An acceleration factor is a value that can be used to speed up the convergence and reduce the number of required iteration in a Gauss Seidel method of power flow analysis</td>
+                                <td>1.1 to 2 (Recommended value of the acceleration factor is 1.6)</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3" class="text-center">PV BUS</th>
+                            </tr>
+                            <tr>
+                                <td>Id number of the bus</td>
+                                <td>Identification number of the bus</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Active power generated in MW</td>
+                                <td>It is the three phase Active power generated by the Synchronous Generator and it is measured in megawatts (MW)</td>
+                                <td>0 W to 1000 MW (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Reactive power generated in MVAR</td>
+                                <td>It is the three phase Reactive power generated by the Synchronous Generator and it is measured in megavolt ampere (MVAR)</td>
+                                <td>0 VAR to 1000 MVAR (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Upper limit of reactive power in MVAR</td>
+                                <td>The maximum capacity of reactive power generation by the Synchronous Generator</td>
+                                <td>0 VAR to 1000 MVAR (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Lower limit of reactive power in MVAR</td>
+                                <td>The minimum capacity of reactive power absorption by the Synchronous Generator</td>
+                                <td>-1000 VAR to 0 MVAR (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Voltage magnitude in p.u.</td>
+                                <td>The magnitude of the voltage at the bus in per unit</td>
+                                <td>0.9 p.u. to 1.05 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Angle of voltage (only for slack bus / bus with the slack Id selected in previous step)</td>
+                                <td>The angle of the voltage at the bus in degrees</td>
+                                <td>-90 degrees to 90 degrees</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3" class="text-center">PQ BUS</th>
+                            </tr>
+                            <tr>
+                                <td>Id number of the bus</td>
+                                <td>Identification number of the bus</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Active power demand</td>
+                                <td>It is the three phase Active power consumed by the load and it is measured in megawatts (MW)</td>
+                                <td>0 W to 1000 MW (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Reactive power demand</td>
+                                <td>It is the three phase Reactive power consumed by the load and it is measured in megavolt ampere (MVAR)</td>
+                                <td>0 VAR to 1000 MVAR (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Flat voltage magnitude in p.u</td>
+                                <td>Flat voltage profile for load bus (in order to perform the power flow analysis, the voltage magnitude is initially assumed as 1 p.u.)</td>
+                                <td>0 VAR to 1000 MVAR (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Angle of voltage</td>
+                                <td>The angle of the voltage at load bus in degree. (in order to perform the power flow analysis, the phase angle of voltage is initially assumed as 0 degree)</td>
+                                <td>0 degree</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the line</td>
+                                <td>The identification number to indicate the transmission line</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the sending end bus of the line</td>
+                                <td>The identification number to indicate the sending end bus of the transmission line</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the receiving end bus of the line</td>
+                                <td>The identification number to indicate the receiving end bus of the transmission line</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Resistance of the line in p.u</td>
+                                <td>The resistance of the transmission line in per unit quantities</td>
+                                <td>0 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Reactance of the line in p.u.</td>
+                                <td>The reactance of the transmission line in per unit quantities</td>
+                                <td>0.0001 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Half-line charging susceptance in p.u</td>
+                                <td>The half-line charging susceptance of the transmission line in per unit quantities</td>
+                                <td>0 p.u. to 0.5 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the transformer</td>
+                                <td>The identification number to indicate the transformer</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the sending end bus of the transformer</td>
+                                <td>The identification number to indicate the sending end bus of the transformer</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the receiving end bus of the transformer</td>
+                                <td>The identification number to indicate the receiving end bus of the transformer</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Resistance of the transformer in p.u</td>
+                                <td>The resistance of the transformer in per unit quantities</td>
+                                <td>0 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Reactance of the transformer in p.u</td>
+                                <td>The reactance of the transformer in per unit quantities</td>
+                                <td>0.0001 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Off nominal tap ratio</td>
+                                <td>The off-nominal tap ratio of the transformer in per unit quantities. This ratio determines the additional transformation relative to the nominal transformer</td>
+                                <td>0.1 to 2 (but not restricted)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sectionOne" class="container mb-3">
+        <h2>Network and Simulation Parameters</h2>
+        <div id="standard-values" class="row">
+            <div class="col-md-6 col-lg-2">
+                <label class="form-label" for="busTot">Number of buses</label>
+                <input class="form-control mb-2" type="number" name="busTot" id="busTot" step="1" min="1" value="2" onchange="checkValid()">
+            </div>    
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label" for="pvTot">Number of PV buses (including slack bus)</label>
+                <input class="form-control mb-2" type="number" name="pvTot" id="pvTot" step="1" min="1" value="1" onchange="updateNoOfBus();checkValid(event);">
+            </div>
+            <div class="col-md-6 col-lg-2">
+                <label class="form-label" for="pqTot">Number of PQ buses</label>
+                <input class="form-control mb-2" type="number" name="pqTot" id="pqTot" step="1" min="0" value="1" onchange="checkValid(event)">
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label" for="tlTot">Number of transmission lines</label>
+                <input class="form-control mb-2" type="number" name="tlTot" id="tlTot" step="1" min="0" value="1">
+            </div>
+            <div class="col-md-6 col-lg-2">
+                <label class="form-label" for="tmTot">Number of transformers</label>
+                <input class="form-control mb-2" type="number" name="tmTot" id="tmTot" step="1" min="0" value="2">
+            </div>
+            <div class="col-md-6 col-lg-2">
+                <label class="form-label" for="slack">Id of slack bus</label>
+                <input class="form-control mb-2" type="number" name="slack" id="slack" step="1" min="1" max="1" value="1">
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label" for="iter">Maximum number of iterations</label>
+                <input class="form-control mb-2" type="number" name="iter" id="iter" step="1" min="1" value="100">
+            </div>
+            <div class="col-md-6 col-lg-4"> 
+                <label class="form-label" for="tol">Convergence tolerance for voltage difference in p.u</label>
+                <input class="form-control mb-2"  type="number" name="tol" id="tol" step="any" min="0" value="0.001"> 
+            </div>
+            <div class="col-md-12 col-lg-3">
+                <label class="form-label" for="mvab">Base MVA</label>
+                <input class="form-control mb-2" type="number" name="mvab" id="mvab" step="any" min="0" value="250"> 
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success mt-4" type="submit" onclick="startExp()">Next</button>
+            </div>
+        </div>
+    </div>
+    <div id="sectionTwo">
+        <div class="container mb-5">
+            <h2 class="stepTwo">PV Bus Data</h2>
+            <div id="pvMatrix">
+    
+            </div>
+        </div>
+        <div class="container mb-5">
+            <h2 class="stepTwo">PQ Bus Data</h2>
+            <div id="pqMatrix" >
+    
+            </div>
+        </div>
+        <div class="container mb-5">
+            <h2 class="stepTwo">Transmission Line Data</h2>
+            <div id="tlMatrix">
+    
+            </div>
+        </div>
+        <div class="container mb-5">
+            <h2 class="stepTwo">Transformer Data</h2>
+            <div id="tmMatrix">
+    
+            </div>
+        </div>
+    </div>
+    <div id="sectionThree" class="container mb-2">
+        <h1 class="stepTwo">Results</h1>
+        <div class="form-check form-switch">
+            <input id="isYbusRequired" class="form-check-input" type="checkbox" onchange="toggleCheck()">
+            <label class="form-check-label" for="isYbusRequired">Display Ybus</label>
+        </div>
+        <div id="result-ybus" hidden>
+
+        </div>
+        <div id="result-one" class="table-responsive mb-3">
+            
+        </div>
+        <div id="result-two" class="table-responsive">
+            
+        </div>
+    </div>
+    <div id="controls" class="container my-2">
+        <div class= "d-flex justify-content-end">
+            <button type="reset" class="btn btn-dark mx-2" onclick="back()">Back</button>
+            <button type="submit" class="btn btn-success" onclick="calculate()">Run Power Flow Analysis</button>
+        </div>
+    </div>
+    <template>
+        <div id="pvRow" class="row mb-4 busDetPv">
+            <div class="col-md-6 col-lg-4 disableDefault">
+                <label class="form-label" for="id-bus-pv">Id number of the bus</label>
+                <input class="form-control mb-2" type="number" name="id-bus-pv" id="id-bus-pv" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="pact-g-bus-pv">Active power generated in MW</label>
+                <input class="form-control mb-2" type="number" name="pact-g-bus-pv" id="pact-g-bus-pv" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="preact-d-bus-pv">Reactive power generated in MVAR</label>
+                <input class="form-control mb-2" type="number" name="preact-d-bus-pv" id="preact-d-bus-pv" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="preact-g-u-bus-pv">Upper limit of reactive power in MVAR</label>
+                <input class="form-control mb-2" type="number" name="preact-g-u-bus-pv" id="preact-g-u-bus-pv" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="preact-g-l-bus-pv">Lower limit of reactive power in MVAR</label>
+                <input class="form-control mb-2" type="number" name="preact-g-l-bus-pv" id="preact-g-l-bus-pv" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="vmag-bus-pv">Voltage magnitude in p.u.</label>
+                <input class="form-control mb-2" type="number" name="vmag-bus-pv" id="vmag-bus-pv" step="any" min="0">
+            </div>
+            <hr class="mt-4">
+        </div>
+        <div id="pqRow" class="row mb-4 busDetPq">
+            <div class="col-md-6 col-lg-2 disableDefault">
+                <label class="form-label" for="id-bus-pq">Id number of the bus</label>
+                <input class="form-control mb-2 " type="number" name="id-bus-pq" id="id-bus-pq" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="pact-d-bus-pq">Active power demand in MW</label>
+                <input class="form-control mb-2" type="number" name="pact-d-bus-pq" id="pact-d-bus-pq" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <label class="form-label" for="preact-d-bus-pq">Reactive power demand in MVAR</label>
+                <input class="form-control mb-2" type="number" name="preact-d-bus-pq" id="preact-d-bus-pq" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label" for="vmag-bus-pq">Flat voltage magnitude in p.u</label>
+                <input class="form-control mb-2" type="number" name="vmag-bus-pq" id="vmag-bus-pq" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <label class="form-label" for="vdel-bus-pq">Angle of voltage &delta;</label>
+                <input class="form-control mb-2" type="number" name="vdel-bus-pq" id="vdel-bus-pq" step="any" min="0">
+            </div>
+            <hr class="mt-4">
+        </div>
+        <div id="tlRow" class="row mb-4 compDetTl">
+            <div class="col-md-6 col-lg-4 disableDefault">
+                <label class="form-label" for="id-line">Id number of the component</label>
+                <input class="form-control mb-2" type="number" name="id-line" id="id-line" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="id-s-bus-line">Id number of the sending end bus of the line</label>
+                <input class="form-control mb-2"  type="number" name="id-s-bus-line" id="id-s-bus-line" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="id-r-bus-line">Id number of the receiving end bus of the line</label>
+                <input class="form-control mb-2" type="number" name="id-r-bus-line" id="id-r-bus-line" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="r-line">Resistance of the line in p.u (R)</label>
+                <input class="form-control mb-2" type="number" name="r-line" id="r-line" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="x-line">Reactance of the line in p.u (X)</label>
+                <input class="form-control mb-2" type="number" name="x-line" id="x-line" step="any">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="hcla-line">Half-line charging susceptance in p.u</label>
+                <input class="form-control mb-2" type="number" name="hcla-line" id="hcla-line" step="any" min="0">
+            </div>
+            <hr class="mt-4">
+        </div>
+        <div id="tmRow" class="row mb-4 compDetTm">
+            <div class="col-md-6 col-lg-3 disableDefault">
+                <label class="form-label" for="id-tformer">Id number of the component</label>
+                <input class="form-control mb-2" type="number" name="id-tformer" id="id-tformer" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="id-t-bus-tformer">Id number of the tap side bus of the transformer</label>
+                <input class="form-control mb-2" type="number" name="id-t-bus-tformer" id="id-t-bus-tformer" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <label class="form-label" for="id-nt-bus-tformer">Id number of the receiving end bus of the transformer</label>
+                <input class="form-control mb-2" type="number" name="id-nt-bus-tformer" id="id-nt-bus-tformer" step="1" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="r-tformer">Resistance of the transformer in p.u (R)</label>
+                <input class="form-control mb-2" type="number" name="r-tformer" id="r-tformer" step="any" min="0">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="x-tformer">Reactance of the transformer in p.u (X)</label>
+                <input class="form-control mb-2" type="number" name="x-tformer" id="x-tformer" step="any">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <label class="form-label" for="a-tformer">Off nominal tap ratio</label>
+                <input class="form-control mb-2" type="number" name="a-tformer" id="a-tformer" step="any" min="0">
+            </div>
+            <hr class="mt-4">
+        </div>
+        <div id="slackDel" class="col-md-6 col-lg-4">
+            <label class="form-label" for="vdel-bus-pv">Angle of voltage &delta; (in degree)</label>
+            <input class="form-control mb-2" type="number" name="vdel-bus-pv" id="vdel-bus-pv" step="any" min="-90" max="90">
+        </div>
+    </template>
+    <footer class="text-center py-4">
+        &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+    </footer>
+    <script src = "./js/complex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@9.3.0/lib/browser/math.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+hr{
+    border: 6px solid black;
+    border-radius: 6px; 
+}
+th{
+    text-align: center;
+}
+.modal td{
+    text-align:left;
+}
+#sectionThree td{
+    text-align: center;
+}
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: lightgrey;
+}
+.help-body{
+    padding-top: 0;
+}
+body{
+    background-color: #ffe8d6;
+}
+footer{
+    background-color: #f9f6f7;
+}
+.exp-title{
+    color: #ffff;
+    font-size: 1.2rem;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.info{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-size: x-large;
+}
+.info:hover{
+    color:rgba(255, 255, 255, 0.5);
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+@media (min-width:992px) and (max-width:1400px) {
+    body{
+        font-size: small;
+    }
+}

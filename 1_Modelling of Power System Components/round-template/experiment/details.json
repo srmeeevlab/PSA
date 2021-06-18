@@ -1,0 +1,65 @@
+{
+
+   "details": [
+       {
+			"Experiment": "Modelling of Power System Components",
+			"Lab": "Power System Simulation Lab",
+			"Discipline": "Electrical and Electronics Engineering",
+			"Technology": "HTML,CSS,Javascript"
+       }
+   ],
+
+   "developer": [
+       {
+      "Developer": "Rahul Raman R",
+      "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+      "InstituteAcronym": "SRM IST"
+       },
+
+      {
+        "Developer": "Eric Raymund Rex S",
+        "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+        "InstituteAcronym": "SRM IST"
+      },
+      {
+        "Developer": "Dr.S.Usha",
+        "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+        "InstituteAcronym": "SRM IST"
+      }
+   ],
+
+   "contributer": [
+       {
+  			"Contributer": "N.R.S.Lakshanasri",
+        "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+  			"InstituteAcronym": "SRM IST"
+       },
+
+       {
+         "Contributer": "Rajeta Sarkar",
+          "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+         "InstituteAcronym": "SRM IST"
+       },
+
+       {
+    			"Contributer": "Rajat Pathak",
+          "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+          "InstituteAcronym": "SRM IST"
+       },
+
+       {
+         "Contributer": "Dr.D.Maharajan",
+          "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+         "InstituteAcronym": "SRM IST"
+       },
+
+       {
+         "Contributer": "Dr.R.Ramya",
+          "Institute": "Sri Ramaswamy Memorial Institute of Science and Technology",
+         "InstituteAcronym": "SRM IST"
+       }
+
+      
+   ]
+
+}

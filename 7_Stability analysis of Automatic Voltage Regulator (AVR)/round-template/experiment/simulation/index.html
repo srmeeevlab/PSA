@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 7</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <nav class="nav-bar navbar-dark mb-5" style="background-color: #ff971d;">
+        <div class="container-fluid d-flex justify-content-between">
+            <a href="https://www.srmist.edu.in/" target="_blank"><img width="176px" height="59px" class="navbar-brand my-2 p-0" src="images/srmLogo.png"/></a>
+            <span class="navbar-text text-center">
+                <strong class="exp-title">Stability analysis of Automatic Voltage Regulator (AVR)</strong>
+            </span>
+            <button type="button" class="my-auto info" data-bs-toggle="modal" data-bs-target="#helpModal" title="Help"><i class="bi bi-info-circle"></i></button>
+        </div>
+    </nav>
+    <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Answer the following questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="question"></div>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="a" id="answer_a" name="answer">
+                            <label id="answer_a_label" class="form-check-label" for="answer_a">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="b" id="answer_b" name="answer">
+                            <label id="answer_b_label" class="form-check-label" for="answer_b">
+                            </label>
+                        </div>
+                    </div>
+                    <div id="comments">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="verifyInteractive()">Verify</button>
+                    <button id="nextQuestion" type="button" class="btn btn-primary" disabled onclick="next()">Next</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body help-body">
+                    <strong>To open this menu again click on <i class="bi bi-info-circle"></i> on the top right.</strong><br><br>
+                    <div>
+                        Formulae needed for the execution of the experimet<br>
+                        <img class="img-fluid" src="./images/Exp7_Formula1.png" alt="Formula 1"><br>
+                        <img class="img-fluid" src="./images/Exp7_Formula2.png" alt="Formula 2"><br>
+                        <img class="img-fluid" src="./images/Exp7_Formula3.png" alt="Formula 3"><br>
+                        <img class="img-fluid" src="./images/Exp7_Formula4.png" alt="Formula 4"><br><br>
+                    </div>
+                    <br>
+                    <br>
+                    <table class="table table-striped">
+                        <thead class="sticky">
+                            <tr>
+                                <th scope="col">
+                                    Field   
+                                </th>
+                                <th scope="col">
+                                    Explanation
+                                </th>
+                                <th scope="col">
+                                    General Range
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Amplifier Gain (K<sub>A</sub>)</td>
+                                <td>The gain factor of the Amplifier used in AVR</td>
+                                <td>1 to 10 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Amplifier Time Constant (T<sub>A</sub>)</td>
+                                <td>The response time of the Amplifier used in AVR</td>
+                                <td>0.02 sec – 0.1 sec</td>
+                            </tr>
+                            <tr>
+                                <td>Exciter Gain (K<sub>e</sub>)</td>
+                                <td>The gain factor of the Exciter used in AVR</td>
+                                <td>1 to 10 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Exciter Time constant (T<sub>e</sub>)</td>
+                                <td>The response time of the Exciter used in AVR</td>
+                                <td>0.5 sec – 1.0 sec</td>
+                            </tr>
+                            <tr>
+                                <td>Generator Time constant (T<sub>d0</sub>)</td>
+                                <td>The response time of the Generator used in AVR</td>
+                                <td>0.5 sec – 2.0 sec</td>
+                            </tr>
+                            <tr>
+                                <td>Magnitude of change in reference voltage (%)</td>
+                                <td>Step change of reference voltage</td>
+                                <td>1 % - 100 %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <svg version="1.1" viewBox="0 0 420.07 82.446" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(106.41 -42.82)">
+             <path d="m-65.1 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <g transform="translate(-148.82 -35.28)">
+              <g transform="translate(55.185 .75595)">
+               <path d="m60.506 87.465-25.658 25.658m25.658-1e-5 -25.658-25.658m25.658 25.658a18.143 18.143 0 0 1-25.658 1e-5 18.143 18.143 0 0 1 0-25.658 18.143 18.143 0 0 1 25.658 3e-6 18.143 18.143 0 0 1 0 25.658z" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+               <path d="m31.758 99.872h10m-5-5v10" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+               <path d="m42.908 109.99h10" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+              </g>
+             </g>
+             <path d="m13.035 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m99.792 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m186.55 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m233.45 65.778h39.856m39.856 0-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m-45.953 124.77h319.26v-58.988m-319.26 19.132 9.8022 9.8079m-9.8022-9.8079-9.8174 9.8171m9.8174 30.039v-39.856" style="fill:none;stroke:#000"/>
+             <rect x="14.035" y="43.32" width="44.901" height="44.901" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <text class="number" x="14.947367" y="58.032185" style="fill:#000000;font-family:sans-serif;font-size:0.5rem;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan id="ka" x="14.947367" y="58.032185" style="stroke-width:.26458">K<tspan style="baseline-shift:sub;font-size:65%">A</tspan></tspan></text>
+             <text class="number" x="14.823062" y="78.863182" style="fill:#000000;font-family:sans-serif;font-size:0.5rem;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="ta" x="14.823062" y="78.863182" style="stroke-width:.26458">1+sT<tspan style="baseline-shift:sub;font-size:65%">A</tspan></tspan></text>
+             <path d="m16.486 65.648h40" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <rect x="100.79" y="43.32" width="44.901" height="44.901" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <text class="number" x="101.70419" y="58.556183" style="fill:#000000;font-family:sans-serif;font-size:0.5rem;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="ke" x="101.70419" y="58.556183" style="stroke-width:.26458">K<tspan style="baseline-shift:sub;font-size:65%">e</tspan></tspan></text>
+             <text class="number" x="101.58016" y="79.486183" style="fill:#000000;font-family:sans-serif;font-size:0.5rem;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="te" x="101.58016" y="79.486183" style="stroke-width:.26458">1+sT<tspan style="baseline-shift:sub;font-size:65%">e</tspan></tspan></text>
+             <path d="m103.24 66.271h40" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <g transform="translate(-2.1826e-6 -2.1643e-5)">
+              <rect x="187.55" y="43.32" width="44.901" height="44.901" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+              <text class="number" x="188.4613" y="58.654205" style="fill:#000000;font-family:sans-serif;font-size:0.5rem;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="kf" x="188.4613" y="58.654205" style="stroke-width:.26458">K<tspan style="baseline-shift:sub;font-size:65%">f</tspan></tspan></text>
+              <text class="number" x="188.33728" y="79.486206" style="fill:#000000;font-family:sans-serif;font-size:0.5rem;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="tdo" x="188.33728" y="79.486206" style="stroke-width:.26458">1+sT<tspan style="baseline-shift:sub;font-size:65%">do</tspan></tspan></text>
+              <path d="m190 66.271h40" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             </g>
+             <text x="12.606174" y="98.761826" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="12.606174" y="98.761826" style="stroke-width:.26458">Amplifier</tspan><tspan x="12.606174" y="117.2826" style="stroke-width:.26458"/></text>
+             <text x="107.27232" y="98.761826" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="107.27232" y="98.761826" style="stroke-width:.26458">Exciter</tspan><tspan x="107.27232" y="117.2826" style="stroke-width:.26458"/><tspan x="107.27232" y="135.80338" style="stroke-width:.26458"/></text>
+             <text x="182.83121" y="98.575829" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="182.83121" y="98.575829" style="stroke-width:.26458">Generator</tspan><tspan x="182.83121" y="117.0966" style="stroke-width:.26458"/><tspan x="182.83121" y="135.61737" style="stroke-width:.26458"/></text>
+             <text x="-106.49462" y="53.344112" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="-106.49462" y="53.344112" style="stroke-width:.26458">ΔV<tspan style="baseline-shift:sub;font-size:65%">ref</tspan></tspan></text>
+             <text x="-27.403376" y="53.246704" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="-27.403376" y="53.246704" style="stroke-width:.26458">Δe</tspan></text>
+             <text x="71.169022" y="53.344116" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="71.169022" y="53.344116" style="stroke-width:.26458">ΔV<tspan style="baseline-shift:sub;font-size:65%">r</tspan></tspan></text>
+             <text x="157.92613" y="53.344131" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="157.92613" y="53.344131" style="stroke-width:.26458">ΔV<tspan style="baseline-shift:sub;font-size:65%">f</tspan></tspan></text>
+             <text x="264.74887" y="53.344162" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="264.74887" y="53.344162" style="stroke-width:.26458">ΔV<tspan style="baseline-shift:sub;font-size:65%"/></tspan></text>
+            </g>
+        </svg>
+        <div>
+            <div class="mt-3">
+                <div class="row">
+                    <h3>Parameters for Modelling AVR</h3>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="amplifierGain">Amplifier Gain (K<sub>A</sub>)</label>
+                            <input class="form-control" id="amplifierGain" type="number" step="any" value="20" min="0">
+                            <span class="input-group-text">dB</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="amplifierTime">Amplifier Time Constant (T<sub>A</sub>)</label>
+                            <input class="form-control" id="amplifierTime" type="number" step="any" value="0.06" min="0">
+                            <span class="input-group-text">s</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="exiterGain">Exciter Gain (K<sub>e</sub>)</label>
+                            <input class="form-control" id="exiterGain" type="number" step="any" value="1" min="0">
+                            <span class="input-group-text">dB</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="exiterTime">Exciter Time constant (T<sub>e</sub>)</label>
+                            <input class="form-control" id="exiterTime" type="number" step="any" value="0.8" min="0">
+                            <span class="input-group-text">s</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="generatorGain">Generator Gain (K<sub>f</sub>)</label>
+                            <input class="form-control" id="generatorGain" type="number" step="any" value="0.8" min="0">
+                            <span class="input-group-text">dB</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="generatoeTime">Generator Time constant (T<sub>d0</sub>)</label>
+                            <input class="form-control" id="generatorTime" type="number" min="0" step="any" value="1.5">
+                            <span class="input-group-text">s</span>
+                        </div>  
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="magnitude">Magnitude of change in reference voltage</label>
+                            <input class="form-control" id="magnitude" type="number" step="any" min="1" max="100" value="100">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div> 
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="voltage">Calculated steady state voltage</label>
+                            <input class="form-control" id="voltage" type="number">
+                            <span class="input-group-text">V</span>
+                        </div>
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="voltageError">Calculated steady state voltage error</label>
+                            <input class="form-control" id="voltageError" type="number" >
+                            <span class="input-group-text">V</span>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success mb-3" type="submit" onclick="updateValues();">Verify</button>
+            </div>
+        </div>
+        <div id="result" class="mb-3">
+            <h1>
+                Results
+            </h1>
+            <br>
+            <h4>
+                <span id="ssVoltage"></span><br>
+                <span id="ssError"></span>
+            </h4>
+            <canvas id="dynamicResponse" ></canvas>
+        </div>
+        <div id="postQuestion" class="mb-3">
+            <h1>
+                Post simulation analysis
+            </h1>
+            <br>
+            <h4>
+                Is the system plotted above stable ?
+            </h4>
+            
+            
+            <div class="form-check">
+                <input type="radio" name="observ" id="observTrue">
+                <label class="form-check-label" for="observTrue">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="observ" id="observFalse">
+                <label class="form-check-label" for="observFalse">
+                    No
+                </label>
+            </div>
+            <button class="btn btn-success" type="submit" onclick="verify();">Check Answer</button>
+        </div>
+    </div>
+    <footer class="text-center py-4">
+        &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@9.3.2/lib/browser/math.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

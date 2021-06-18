@@ -1,0 +1,46 @@
+body {
+    background-color: #FFE8D6;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.exp-title{
+    color: #ffff;
+    font-size: 1.2rem;
+}
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    background-color: lightgrey;
+    z-index: 5;
+}
+.help-body{
+    padding-top: 0;
+}
+#info{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-size: x-large;
+}
+#info:hover{
+    color:rgba(255, 255, 255, 0.5);
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#result>p>em>strong {
+    color: green;
+}
+@media only screen and (max-width: 480px) {
+    img {
+        width: 100%;
+    }
+    /* table {
+        width: 100%;
+    } */
+}

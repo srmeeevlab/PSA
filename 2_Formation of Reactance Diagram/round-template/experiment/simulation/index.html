@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 2.1</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/myStyles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+    <!-- Nav bar -->
+    <nav class="nav-bar navbar-dark mr-5" style="background-color: #FF971E;">
+        <div class="container-fluid d-flex justify-content-between">
+            <span class="navbar-brand">
+                <a href="https://www.srmist.edu.in/" target="_blank"><img width="176px" height="59px" class="navbar-brand my-2 p-0" src="images/srmLogo.png"/></a>
+            </span>
+            <span class="navbar-text text-center">
+                <strong class="exp-title">Formation of Reactance Diagram Part 1</strong>
+            </span>
+            <button id="info" type="button" class="my-auto" data-bs-toggle="modal" data-bs-target="#helpModal" title="Help"><i class="bi bi-info-circle"></i></button>
+        </div>
+    </nav>
+    <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Answer the following questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="question"></div>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="a" id="answer_a" name="answer">
+                            <label id="answer_a_label" class="form-check-label" for="answer_a">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="b" id="answer_b" name="answer">
+                            <label id="answer_b_label" class="form-check-label" for="answer_b">
+                            </label>
+                        </div>
+                    </div>
+                    <div id="comments">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="verifyInteractive()">Verify</button>
+                    <button id="nextQuestion" type="button" class="btn btn-primary" disabled onclick="next()">Next</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <img class="img-fluid" src="./images/Q1_region.png" alt="">
+                        The Given power system model can be divided into 3 regions namely R1: Green, R2: Red, R3: Blue<br>
+                        The components in R1 are:<br>
+                        <ul>
+                            <li>G1</li>
+                            <li>G2</li>
+                            <li>L1</li>
+                            <li>Primary of T1</li>
+                        </ul>
+                        The components in R2 are:<br>
+                        <ul>
+                            <li>Secondary of T1</li>
+                            <li>Tx1</li>
+                            <li>Primary of T2</li>
+                        </ul>
+                        The components in R3 are:<br>
+                        <ul>
+                            <li>Secondary of T2</li>
+                            <li>M1</li>
+                            <li>L2</li>
+                        </ul>
+                        The procedure to move forward is as follows
+                        <ul>
+                            <li>First choose a component to be the base for the entire system</li>(In this section we explain with Tx1 as the component).
+                            <li>Since we have chosen Tx1 as our base component we will consider its MVA as the base MVA for the entire power system.</li>
+                            <li>To determine the base kV though we have to divide the components into regions divided by transformers as shown in the above image.</li>
+                            <li>Once divided, assign the base kV of R2 as the kV of Tx1 this is because the base kV of the region containg the base element is the base kV of the base element.</li>
+                            <li>Now The calculation of the base kV for region 1 and 3 has to be done this is done using the below formule</li>
+                            <img src="./images/Theory_Eqn_1.png" alt="base kV of Region 1"><br>
+                            <img src="./images/Theory_Eqn_2.png" alt="base kV of Region 3"><br>
+                            Where kV<sub>bR1</sub> is the base kV of region 1, kV<sub>bR2</sub> is the base kV of region 2, kV<sub>bR3</sub> is the base kV of region 3, kV<sub>Tn,(primary/secondary)</sub> the rated kv of the primary/secondary side of transformer n (T<sub>n</sub>)
+                            <li>Once base kV for all the region have been found the perunit impedance can be found using the following formule (here for new base kV of the component use the calculated base kV of the region the component is in)</li>
+                            <img src="./images/Theory_Eqn_3.png" alt="per unit impedance formula"><br>
+                            <img src="./images/Theory_Eqn_4.png" alt="per unit quantity formula"><br>
+                            <img src="./images/Theory_Eqn_5.png" alt="Zactual through Zpu, Kvb and MVAb of the component"><br>
+                            <img src="./images/Theory_Eqn_6.png" alt="Zpu through the Zpu old along with old and new base MVA, base kV"><br>
+                            <strong><em>NOTE: The kV<sub>b,given</sub>, Z<sub>pu,given</sub>, MVA<sub>b,given</sub> are the component's kV, Z<sub>pu</sub>, MVA. The "given" may be replace by "old"</em></strong>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#helpModal-two" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="helpModal-two" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body help-body">
+                    <table class="table table-striped">
+                        <thead class="sticky">
+                            <tr>
+                                <th scope="col">
+                                    Field   
+                                </th>
+                                <th scope="col">
+                                    Explanation
+                                </th>
+                                <th scope="col">
+                                    General Range
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>G<sub>n</sub></td>
+                                <td>Represents a Synchronous Generator with a unique identification number n (G1, G2,…Gn)</td>
+                                <td rowspan="5" style="vertical-align : middle;">Representation for Symbols which are present in the given Single Line Diagram</td>
+                            </tr>
+                            <tr>
+                                <td>M<sub>n</sub></td>
+                                <td>Represents a motor with a unique identification number n (M1, M2,…Mn)</td>
+                            </tr>
+                            <tr>
+                                <td>T<sub>n</sub></td>
+                                <td>Represents a transformer with a unique identification number n (T1, T2,…Tn)</td>
+                            </tr>
+                            <tr>
+                                <td>Tx<sub>n</sub></td>
+                                <td>Represents a transmission line with a unique identification number n (TX1, TX2,…TXn)</td>
+                            </tr>
+                            <tr>
+                                <td>L<sub>n</sub></td>
+                                <td>Represents a load with a unique identification number n (L1, L2,…Ln)</td>
+                            </tr>
+                            <tr>
+                                <td>Z(new)<sub>p.u</sub></td>
+                                <td>It is the per unit impedance of the component calculated with respect to the new base values (kV<sub>b,new</sub>, MVA<sub>b,new</sub>)</td>
+                                <td>0.0001 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" colspan="3">For generator, motor and load</td>
+                            </tr>
+                            <tr>
+                                <td>Base MVA</td>
+                                <td>Base Mega Volt Ampere</td>
+                                <td>1 MVA to 1000 MVA (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Base KV</td>
+                                <td>Base kilo Voltage</td>
+                                <td>220 V to 800 kV (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Z(old)<sub>p.u</sub></td>
+                                <td>It is the per unit impedance of the component calculated with respect to its MVA and kV (kV<sub>b,given</sub>, MVA<sub>b,given</sub> or kV<sub>b,old</sub>, MVA<sub>b,old</sub>)</td>
+                                <td>0.0001 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" colspan="3">For transformers</td>
+                            </tr>
+                            <tr>
+                                <td>Base kV Primary</td>
+                                <td>It is the Base voltage in kV with respect to primary side of the transformer</td>
+                                <td>220 V to 800 kV (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Base kV Secondary</td>
+                                <td>It is the Base voltage in kV with respect to secondary side of the transformer</td>
+                                <td>220 V to 800 kV (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" colspan="3">For transmission lines</td>
+                            </tr>
+                            <tr>
+                                <td>Z (Impedance)</sub></td>
+                                <td>It is defined as the total opposition of the circuit to the electric current</td>
+                                <td>Based on rating of the equipment (kV, MVA)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#helpModal" data-bs-toggle="modal" data-bs-dismiss="modal">Previous</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Body of the expreiment -->
+    <div class="container mt-4">
+        <div class="text-center">
+            <img src="images/Q1_optimised.png" width="100%" alt="Question 2 for Experiment 2">
+        </div>
+
+        <!-- Selection bar -->
+        <nav class="nav-bar navbar-dark mt-3" style="background-color:  #FF971E;">
+            <div class="container-fluid d-flex justify-content-between justify-content-md-start">
+                <span class="navbar-text mx-md-auto">
+                  <div id="C" style="color: black;">
+                    Choose the common base value for per unit calculation <br>
+                  <!-- Generator -->
+                  <input type="radio" id="" name="C" value="G1" >
+                  <label for="G1">G1</label> 	&nbsp;
+                  <input type="radio" id="" name="C" value="G2" >
+                  <label for="G2">G2</label> 	&nbsp;
+
+                  <!-- Motor -->
+                  <input type="radio" id="" name="C" value="M1" >
+                  <label for="M1">M1</label>	&nbsp;
+                  <input type="radio" id="" name="C" value="M2" >
+                  <label for="M2">L1</label>	&nbsp;
+                  <input type="radio" id="" name="C" value="M3" >
+                  <label for="M3">L2</label>	&nbsp;
+                  <!-- Line -->
+                  <input type="radio" id="" name="C" value="L1" >
+                  <label for="L1">TX1</label>	
+                  </div>
+                </span>
+            </div>
+        </nav>
+
+        <!-- Tables -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" style="border: black;">
+                <thead>
+                    <tr>
+                        <th scope="col">Components</th>
+                        <th scope="col">Base MVA</th>
+                        <th colspan="2" ">Base kV</th>
+                        <th scope="col ">Z(old)<sub>p.u</sub></th>
+                        <th scope="col ">Z(new)<sub>p.u</sub></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Generator Part -->
+                    <tr>
+                        <th>G1</th>
+                        <th><input type="number" id="BaseMVA0" style="width:50px"></th>
+                        <th colspan="2 "><input type="number" id="BaseKV0" style="width:50px"></th>
+                        <th><input type="number" id="Zold0" size="4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi0" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew0" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi0" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                    <tr>
+                        <th>G2</th>
+                        <th><input type="number" id="BaseMVA1" style="width:50px"></th>
+                        <th colspan="2 "><input type="number" id="BaseKV1" style="width:50px"></th>
+                        <th><input type="number" id="Zold1" size="4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi1" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew1" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi1" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                    <!-- Motor part -->
+                    <tr>
+                        <th>M1</th>
+                        <th><input type="number" id="BaseMVA2" style="width:50px"></th>
+                        <th colspan="2 "><input type="number" id="BaseKV2" style="width:50px"></th>
+                        <th><input type="number" id="Zold2" size="4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi2" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew2" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi2" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                    <tr>
+                        <th>L1</th>
+                        <th><input type="number" id="BaseMVA3" style="width:50px"></th>
+                        <th colspan="2 "><input type="number" id="BaseKV3" style="width:50px"></th>
+                        <th><input type="number" id="Zold3" size="4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi3" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew3" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi3" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                    <tr>
+                        <th>L2</th>
+                        <th><input type="number" id="BaseMVA4" style="width:50px"></th>
+                        <th colspan="2 "><input type="number" id="BaseKV4" style="width:50px"></th>
+                        <th><input type="number" id="Zold4" size="4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi4" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew4" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi4" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                    <!-- Transformer part -->
+                    <tr>
+                        <th rowspan="2 ">Components</th>
+                        <th rowspan="2 ">Base MVA</th>
+                        <th colspan="2 ">Base kV</th>
+                        <th rowspan="2 ">Z(old)<sub>pu</sub></th>
+                        <th rowspan="2 ">Z(new)<sub>pu</sub></th>
+                    </tr>
+                    <tr>
+                        <th>Primary</th>
+                        <th>Secondary</th>
+                    </tr>
+                    <tr>
+                        <th>T1</th>
+                        <th><input type="number" id="BaseMVA5" style="width:50px"></th>
+                        <th><input type="number" id="PBaseKV0" size="4 " style="width:50px"></th>
+                        <th><input type="number" id="SBaseKV0" size="4 " style="width:50px"></th>
+                        <th><input type="number" id="Zold5" size="4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi5" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew5" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi5" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                    <tr>
+                        <th>T2</th>
+                        <th><input type="number" id="BaseMVA6" style="width:50px"></th>
+                        <th><input type="number" id="PBaseKV1" size="4 " style="width:50px"></th>
+                        <th><input type="number" id="SBaseKV1" size="4 " style="width:50px"></th>
+                        <th><input type="number" id="Zold6" size="4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi6" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew6" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi6" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                   
+                    <tr>
+                        <th>Components</th>
+                        <th colspan="3 ">Base MVA</th>
+                        <th>Z in Ω</th>
+                        <th>Z <sub>pu</sub></th>
+                    </tr>
+                    <tr>
+                        <th>TX1</th>
+                        <th colspan="3 "><input type="number" id="BaseMVA7" style="width:50px"></th>
+                        <th><input type="number" id="Zold7" size=" 4 " value="0" style="width:50px">+j(<input type="number" id="Zoldi7" size="4 " value="0" style="width:50px">)</th>
+                        <th><input type="number" id="Znew7" size="4 " value="0" style="width:50px">+j(<input type="number" id="Znewi7" size="4 " value="0" style="width:50px">)</th>
+                    </tr>
+                    
+                    <tr>
+                        <th colspan="5 "></th>
+                        <th><button class="btn btn-success " onclick="verify()">Verify Z(new)<sub>p.u</sub></button></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <div id="er">
+
+            </div>
+        </div>
+        <div class="container text-center mb-5">
+            <div>
+                <h2>Per Unit Reactance Diagram</h2>
+            </div>
+            <svg version="1.1" viewBox="0 0 180.48 60" xmlns="http://www.w3.org/2000/svg">
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m-417.25-117.76h161.6" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <circle transform="matrix(0 -.14045 .14045 0 .14843 59.466)" cx="90.327" cy="30.277" r="30" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(0 -.14045 .14045 0 .14843 59.466)" d="m120.33 30.277h59.95" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(0 -.14045 .14045 0 .14843 59.466)" d="m60.327 30.277h-60.05" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(.24988 0 0 .24988 -17.893 38.854)" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;shape-inside:url(#rect1053);stroke-width:1.499;white-space:pre" xml:space="preserve"><tspan x="80.222656" y="39.933093"><tspan style="font-family:sans-serif;font-size:22.578px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold;stroke-width:1.499">G</tspan></tspan></text>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m-417.25 62.24v-9c-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 0-24 5.0001-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0002-5.0001-6.0002-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999v-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-58.564087" y="14.072764" style="fill:#000000;font-family:sans-serif;font-size:6.0924px;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="-58.564087" y="14.072764" style="stroke-width:.15231">G1</tspan></text>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-27.621008" y="10.195184" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="-27.621008" y="10.195184" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"> <tspan id="R1"></tspan> </tspan></text>
+                <circle transform="matrix(0 -.14045 .14045 0 22.846 59.466)" cx="90.327" cy="30.277" r="30" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(0 -.14045 .14045 0 22.846 59.466)" d="m120.33 30.277h59.95" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(0 -.14045 .14045 0 22.846 59.466)" d="m60.327 30.277h-60.05" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(.14045 0 0 .14045 85.701 25.404)" d="m-417.25 62.24v-9c-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 0-24 5.0001-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0002-5.0001-6.0002-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999v-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-58.516487" y="38.7024" style="fill:#000000;font-family:sans-serif;font-size:6.0924px;line-height:1.25;stroke-width:.15255" xml:space="preserve"><tspan x="-58.516487" y="38.7024" style="stroke-width:.15255">G2</tspan></text>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-27.621008" y="34.825184" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="-27.621008" y="34.825184" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"><tspan id="R2"></tspan></tspan><tspan x="-27.621008" y="39.675884" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"/></text>
+                <g transform="translate(10.79 19.906)">
+                 <g transform="matrix(.92154 0 0 .92154 -10.79 -15.291)">
+                  <g transform="matrix(.15241 0 0 .15241 68.368 22.558)">
+                   <g transform="translate(1506.5 -27.169)">
+                    <g transform="translate(-44.481 -8.7042)"></g>
+                   </g>
+                  </g>
+                  <g transform="matrix(.15241 0 0 .15241 68.368 22.558)"></g>
+                  <g transform="matrix(.15241 0 0 .15241 92.998 22.558)"></g>
+                  <path transform="matrix(.15241 0 0 .15241 68.368 22.558)" d="m-417.25 242.24h161.6" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                  <path transform="matrix(.15241 0 0 .15241 68.368 22.558)" d="m-255.11 242.78 160.53 1.7511" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                  <path transform="matrix(.15241 0 0 .15241 68.368 22.558)" d="m-94.579 244.53 708.87-1.2905" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.666;stroke:#000"/>
+                  <path transform="matrix(.15241 0 0 .15241 68.368 22.558)" d="m614.29 243.24 160.53 1.7511" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                  <path transform="matrix(.15241 0 0 .15241 68.368 22.558)" d="m614.29-118.1 160.54 1.2602" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                  <text x="94.921799" y="0.20323983" style="fill:#000000;font-family:sans-serif;font-size:11.484px;line-height:1.25;stroke-width:.28711" xml:space="preserve"><tspan x="94.921799" y="0.20323983" style="stroke-width:.28711"/></text>
+                 </g>
+                </g>
+                <g transform="matrix(.92154 0 0 .92154 0 4.6153)">
+                 <text transform="matrix(.27116 0 0 .27116 5.2129 37.154)" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;shape-inside:url(#rect1053-6);stroke-width:1.499;white-space:pre" xml:space="preserve"><tspan x="80.222656" y="39.933093"><tspan style="font-family:sans-serif;font-size:22.578px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold;stroke-width:1.499">G</tspan></tspan></text>
+                </g>
+                <path transform="matrix(.14045 0 0 .14045 69.541 25.392)" d="m-141.13 63.489v9l-30 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-30 9v18" style="fill:none;paint-order:normal;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(.14045 0 0 .14045 69.541 25.392)" d="m-141.13 63.489v-9c-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 0-24 5.0001-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0002-5.0001-6.0002-5.0001-18 1.1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0002-5.0001-6.0002-5.0001-18 1.1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999v-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-59.426716" y="66.815353" style="fill:#000000;font-family:sans-serif;font-size:6.321px;line-height:1.25;stroke-width:.15802" xml:space="preserve"><tspan x="-59.426716" y="66.815353" style="stroke-width:.15802"> L1</tspan></text>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-41.312149" y="63.945183" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="-41.312149" y="63.945183" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"><tspan id="R4"></tspan></tspan></text>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m93.228-117.93h-9c0-10 0-20-6.0003-25-6.0003-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25 0-10 0-20-6.0003-25-6.0003-5.0001-18-5.0001-24 0-5.9999 5.0001-5.9999 15-5.9999 25 0-10 0-20-6.0003-25-6.0003-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25 0-10 0-20-6.0002-25-6.0002-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25h-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(.92154 0 0 .92154 0 4.6153)" x="65.219444" y="11.395997" style="fill:#000000;font-family:sans-serif;font-size:6.321px;line-height:1.25;stroke-width:.15802" xml:space="preserve"><tspan x="65.219444" y="11.395997" style="stroke-width:.15802">T1</tspan></text>
+                <text transform="matrix(.92154 0 0 .92154 0 4.6153)" x="59.566376" y="-2.0596366" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="59.566376" y="-2.0596366" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"><tspan id="R6"></tspan></tspan></text>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m273.23-117.93h-9c0-10 0-20-6.0003-25-6.0003-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25 0-10 0-20-6.0003-25-6.0002-5.0001-18-5.0001-24 0-5.9999 5.0001-5.9999 15-5.9999 25 0-10 0-20-6.0002-25-6.0002-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25 0-10 0-20-6.0002-25-6.0002-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25h-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(.92154 0 0 .92154 0 4.6153)" x="90.782753" y="11.395997" style="fill:#000000;font-family:sans-serif;font-size:6.321px;line-height:1.25;stroke-width:.15802" xml:space="preserve"><tspan x="90.782753" y="11.395997" style="stroke-width:.15802">Tx1</tspan></text>
+                <text transform="matrix(.92154 0 0 .92154 0 4.6153)" x="87.000046" y="-2.0596366" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="87.000046" y="-2.0596366" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"><tspan id="R8"></tspan></tspan></text>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m453.23-117.93h-9c0-10 0-20-6.0003-25-6.0003-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25 0-10 0-20-6.0003-25-6.0002-5.0001-18-5.0001-24 0-5.9999 5.0001-5.9999 15-5.9999 25 0-10 0-20-6.0002-25-6.0002-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25 0-10 0-20-6.0002-25-6.0002-5.0001-18-5.0001-24 1e-4 -5.9999 5.0002-5.9999 15-5.9999 25h-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(.92154 0 0 .92154 0 4.6153)" x="120.70026" y="10.715396" style="fill:#000000;font-family:sans-serif;font-size:5.2916px;line-height:1.25;stroke-width:.13229" xml:space="preserve"><tspan x="120.70026" y="10.715396" style="stroke-width:.13229">T2</tspan></text>
+                <text transform="matrix(.92154 0 0 .92154 0 4.6153)" x="114.43433" y="-2.059906" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.1523" xml:space="preserve"><tspan x="114.43433" y="-2.059906" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.1523"><tspan id="R7"></tspan></tspan></text>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m-178.15-139.09v42.658" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m-255.65-117.76 77.498-0.16858h91.376" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m530.73-139.26v42.658" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(.14045 0 0 .14045 63.004 25.404)" d="m453.22-117.92 73.918-0.17578h87.155" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.66;stroke:#000"/>
+                <path transform="matrix(.14045 0 0 .14045 169.1 25.368)" d="m-141.13 63.489v9l-30 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-60 9 60 9-30 9v18" style="fill:none;paint-order:normal;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(.14045 0 0 .14045 169.1 25.368)" d="m-141.13 63.489v-9c-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 0-24 5.0001-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0002-5.0001-6.0002-5.0001-18 1.1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0002-5.0001-6.0002-5.0001-18 1.1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999v-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-59.42664" y="174.22517" style="fill:#000000;font-family:sans-serif;font-size:6.2087px;line-height:1.25;stroke-width:.15522" xml:space="preserve"><tspan x="-59.42664" y="174.22517" style="stroke-width:.15522"> L2</tspan></text>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-41.286453" y="171.98418" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="-41.286453" y="171.98418" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"><tspan id="R5"></tspan></tspan></text>
+                <circle transform="matrix(0 .14045 .14045 0 167.58 34.27)" cx="90.327" cy="30.277" r="30" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(0 .14045 .14045 0 167.58 34.27)" d="m120.33 30.277h59.95" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <path transform="matrix(0 .14045 .14045 0 167.58 34.27)" d="m60.327 30.277h-60.05" style="fill:none;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(-.24988 0 0 .24988 194.68 39.035)" style="fill:#000000;font-family:sans-serif;font-size:10.583px;letter-spacing:0px;line-height:1.25;shape-inside:url(#rect1053-1-4);stroke-width:1.499;white-space:pre" xml:space="preserve"><tspan x="80.222656" y="39.933093"><tspan style="font-family:sans-serif;font-size:22.578px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold;stroke-width:1.499">M</tspan></tspan></text>
+                <path transform="matrix(.14045 0 0 .14045 268.34 20.365)" d="m-687.16 99.278v-9c-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 9e-5 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 0-24 5.0001-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0003-5.0001-6.0003-5.0001-18 1e-4 -24 5.0002-5.9999 15-5.9999 25-5.9999-10 0-20 0-25-6.0002-5.0001-6.0002-5.0001-18 9e-5 -24 5.0002-5.9999 15-5.9999 25-5.9999v-27" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.667;stroke:#000"/>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-59.613796" y="195.84183" style="fill:#000000;font-family:sans-serif;font-size:6.321px;line-height:1.25;stroke-width:.15802" xml:space="preserve"><tspan x="-59.613796" y="195.84183" style="stroke-width:.15802">M1</tspan></text>
+                <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-27.782015" y="191.87819" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="-27.782015" y="191.87819" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"><tspan id="R3"></tspan></tspan><tspan x="-27.782015" y="196.72888" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"/></text>
+               </svg>      
+        </div>
+        <div class="d-flex justify-content-end">
+            <a id="Nxt" class="btn btn-success mb-5" href="./index(Exp2).html">Next Question</a>
+        </div>
+
+    </div>
+    <footer class="text-center py-4" style="background-color: #f9f6f7;">
+        &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+    </footer>
+
+    <!-- <script src="/script/app2.js"></script> -->
+    <script>
+        window.onbeforeunload = function() {
+  return "Data will be lost if you leave the page, are you sure?";
+};
+    </script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js " integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0 " crossorigin="anonymous "></script>
+    <script>
+let tries = 0;
+let solution = {real:[],img:[]};
+const questionArray = [
+    [{
+        question:"If transmission line is having reactance as j120 ohm , having Base KV as 115kV and Base MVA is 30MVA, Find the Xp.u =",
+        answer:{
+            a:"j0.2820",
+            b:"j0.2722"
+        },
+        correctAnswer:"b",
+        reason:{
+            a:"",
+            b:""
+        },
+        end:true
+    }],
+    [{
+        question:"If Generator (G2) is selected as base , the Base MVA at the Motor (M1) is same or Different",
+        answer:{
+            a:"Same",
+            b:"Different"
+        },
+        correctAnswer:"a",
+        reason:{
+            a:"",
+            b:""
+        }
+    },
+    {
+        question:"If base KV of G1 is 20kv then Base KV at the HV side of TX1(Transformer) will be Same as 20kv",
+        answer:{
+            a:"True",
+            b:"False"
+        },
+        correctAnswer:"a",
+        reason:{
+            a:"",
+            b:""
+        },
+        end:true
+    }]
+];
+const helpModalEl = document.getElementById('helpModal');
+const helpModal = new bootstrap.Modal(helpModalEl);
+const questionModalEl = document.getElementById('questionModal');
+const questionModal = new bootstrap.Modal(questionModalEl);
+let train = true;
+function questionUser(questionData,arrayIndex,questionIndex){
+    document.getElementById("nextQuestion").hidden = false;
+    document.getElementById("nextQuestion").disabled = true;
+    if(questionData.end){
+        document.getElementById("nextQuestion").hidden = true;
+    }
+    document.getElementById("question").innerHTML = questionData.question;
+    document.getElementById("question").setAttribute("data-ans",questionData.correctAnswer);
+    document.getElementById("question").setAttribute("data-ai",arrayIndex);
+    document.getElementById("question").setAttribute("data-qi",questionIndex);
+    document.getElementById("answer_a_label").innerHTML = questionData.answer.a;
+    document.getElementById("answer_b_label").innerHTML = questionData.answer.b;
+}
+function verifyInteractive(){
+    const q = document.getElementById("question");
+    const options = document.getElementsByName("answer");
+    const ans = q.getAttribute("data-ans");
+    const arrayIndex = parseInt(q.getAttribute("data-ai"));
+    const questionIndex = parseInt(q.getAttribute("data-qi"));
+    const currentQuestion = questionArray[arrayIndex][questionIndex];
+    let i;
+    for(i=0;i<options.length;i++)
+        if(options[i].checked){
+            let str = "";
+            if(options[i].value===ans){
+                document.getElementById("nextQuestion").disabled = false;
+                str = "You were right!<br>";
+            }
+            else{
+                document.getElementById("nextQuestion").disabled = true;
+                str = "This should not be selected<br>";
+            }
+            if(currentQuestion.reason[options[i].value] !== "")
+                str = str+`Explanation: ${currentQuestion.reason[options[i].value]}`;
+            document.getElementById("comments").innerHTML = str;
+        }
+}
+function next(start=false,arrayIndex = -1){
+    let questionIndex = 0,i;
+    const q = document.getElementById("question");
+    document.getElementById("comments").textContent = "";
+    const options = document.getElementsByName("answer");
+    for(i=0;i<options.length;i++)options[i].checked = false;
+    if(!start){
+        arrayIndex = parseInt(q.getAttribute("data-ai"));
+        questionIndex = parseInt(q.getAttribute("data-qi"))+1;
+    }
+    const question = questionArray[arrayIndex][questionIndex];
+    questionUser(question,arrayIndex,questionIndex);
+    questionModal.show();
+}
+next(true,0);
+if(train)
+    helpModal.show();
+else{
+    helpModalEl.parentNode.removeChild(helpModalEl);
+    const helpTrigger = document.getElementById("info");
+    helpTrigger.parentNode.removeChild(helpTrigger);
+}
+changeCaller();
+$("#C").change(changeCaller);
+function changeCaller(){
+    const selectedValue = $("input[name='C']:checked").val();
+    console.log(selectedValue);
+    tries = 0;
+    if(selectedValue=="G1"){
+        hideInputs(true);
+    }else if(selectedValue=="G2"){
+        hideInputs(true);
+    }else if(selectedValue=="M1"){
+        hideInputs(true);
+    }else if(selectedValue=="M2"){
+        hideInputs(true);
+    }else if(selectedValue=="M3"){
+        hideInputs(true);
+    }else if(selectedValue=="L1"){
+        hideInputs(false);
+    }else{
+        hideInputs(true);
+    }
+}
+function hideInputs(l1){
+    document.getElementById("BaseMVA7").hidden = l1;
+}
+
+function verify(){
+solution.img = [];
+solution.real = [];
+next(true,1);
+var BaseMVA=new Array();
+var BaseKV_GeneratorAndMotor=new Array();    
+var BaseKV_Transformer_Primary=new Array();  
+var BaseKV_Transformer_Secondary=new Array();
+
+//----------------------------------------------------------
+var Z_old=new Array();
+var Z_old_imaginary=new Array();
+var Z_new=new Array();
+var Z_new_imaginary=new Array();
+
+//👇KVB new value to be caluculated and stored in the array
+var KVB_new=new Array();
+
+var number_of_generator = 2;
+var number_of_motors = 3;
+var number_of_tranformer = 2;
+var number_of_line = 1;
+
+var total_components = parseInt(number_of_tranformer) + parseInt(number_of_generator) + parseInt(number_of_line) + parseInt(number_of_motors);
+console.log("Total Conponents : "+total_components);
+//👇To store the values in the array
+for (var i=0; i < total_components; i++) {
+    var BaseMVA_data = document.getElementById('BaseMVA' + i);
+    BaseMVA.push(BaseMVA_data.value);
+
+    var Z_old_data=document.getElementById('Zold'+i);
+    Z_old.push(Z_old_data.value);
+    var Z_old_i_data=document.getElementById('Zoldi'+i);
+    Z_old_imaginary.push(Z_old_i_data.value);
+
+    var Z_new_data=document.getElementById('Znew'+i);
+    Z_new.push(Z_new_data.value);
+    var Z_new_i_data=document.getElementById('Znewi'+i)
+    Z_new_imaginary.push(Z_new_i_data.value);
+    console.log("Z_new"+Z_new+" "+Z_new_imaginary);
+}
+console.log("BaseMVA : "+BaseMVA);
+console.log("Z old real part : "+Z_old);
+console.log("Z old imaginary part : "+Z_old_imaginary);
+console.log("Z new real part"+Z_new);
+console.log("Z new imaginary part"+Z_new_imaginary);
+
+
+for(var j=0; j<parseInt(number_of_generator)+parseInt(number_of_motors); j++){
+    var BaseKV_GeneratorAndMotor_data=document.getElementById('BaseKV'+j);
+    BaseKV_GeneratorAndMotor.push(BaseKV_GeneratorAndMotor_data.value);
+}
+
+for(var k=0;k<parseInt(number_of_tranformer);k++){
+    var BaseKV_primary_data=document.getElementById('PBaseKV'+k);
+    BaseKV_Transformer_Primary.push(BaseKV_primary_data.value);
+
+    var BaseKV_secondary_data=document.getElementById('SBaseKV'+k);
+    BaseKV_Transformer_Secondary.push(BaseKV_secondary_data.value);
+}
+console.log("BaseKV of Transformer Primary : "+BaseKV_Transformer_Primary);
+console.log("BaseKV of Transformer Secondary : "+BaseKV_Transformer_Secondary);
+
+//To find the components selected-----------------------------------------
+var Component = $("input:radio[name=C]:checked ").val();
+
+//If the radio button not clicked this leads to error
+try {
+    var slected_Component = Component.charAt(0);
+    var position = Component.charAt(Component.length - 1);
+} catch (err) {
+    var slected_Component = 0;
+    var position = -1;
+    document.getElementById('er').innerHTML='<div class="alert alert-danger" role="alert">SELECT BASE!</div>';
+    return;
+}
+console.log("Selected Component : " + slected_Component + " Position: " + position);
+var region;
+if(Component=="G1"){
+    region=0;
+}else if(Component=="G2"){
+    region=0;
+}else if(Component=="M1"){
+    region=2;
+}else if(Component=="M2"){
+    region=0;
+}
+else if(Component=="M3"){
+    region=2;
+}
+else if(Component=="L1"){
+    region=1;
+}
+if(slected_Component=="G"){
+    //If the selected component is Generator
+    if(position==1){
+        KVB_new[0]=parseFloat(BaseKV_GeneratorAndMotor[0]);
+        KVB_new[1]=parseFloat(KVB_new[0])*parseFloat(BaseKV_Transformer_Secondary[0]/BaseKV_Transformer_Primary[0]);
+        KVB_new[2]=parseFloat(KVB_new[1])*parseFloat(BaseKV_Transformer_Secondary[1]/BaseKV_Transformer_Primary[1]);
+        console.log(KVB_new);
+    }
+    if(position==2){
+        KVB_new[0]=parseFloat(BaseKV_GeneratorAndMotor[1]);
+        KVB_new[1]=parseFloat(KVB_new[0])*parseFloat(BaseKV_Transformer_Secondary[0]/BaseKV_Transformer_Primary[0]);
+        KVB_new[2]=parseFloat(KVB_new[1])*parseFloat(BaseKV_Transformer_Secondary[1]/BaseKV_Transformer_Primary[1]);
+        console.log(KVB_new);
+        
+    }
+}else if(slected_Component=="M"){
+    if(position==1){
+        KVB_new[2]=parseFloat(BaseKV_GeneratorAndMotor[2]);
+        KVB_new[1]=parseFloat(KVB_new[2])*parseFloat(BaseKV_Transformer_Primary[1]/BaseKV_Transformer_Secondary[1]);
+        KVB_new[0]=parseFloat(KVB_new[1])*parseFloat(BaseKV_Transformer_Primary[0]/BaseKV_Transformer_Secondary[0]);
+        console.log(KVB_new);
+    
+    }
+    if(position==2){
+        KVB_new[0]=parseFloat(BaseKV_GeneratorAndMotor[3]);
+        KVB_new[1]=parseFloat(KVB_new[0])*parseFloat(BaseKV_Transformer_Secondary[0]/BaseKV_Transformer_Primary[0]);
+        KVB_new[2]=parseFloat(KVB_new[1])*parseFloat(BaseKV_Transformer_Secondary[1]/BaseKV_Transformer_Primary[1]);
+        console.log(KVB_new);
+    }
+    if(position==3){
+        KVB_new[2]=parseFloat(BaseKV_GeneratorAndMotor[4]);
+        KVB_new[1]=parseFloat(KVB_new[2])*parseFloat(BaseKV_Transformer_Primary[1]/BaseKV_Transformer_Secondary[1]);
+        KVB_new[0]=parseFloat(KVB_new[1])*parseFloat(BaseKV_Transformer_Primary[0]/BaseKV_Transformer_Secondary[0]);
+        console.log(KVB_new);
+    }
+}else if(slected_Component=="L"){
+    if(position=="1"){
+        KVB_new[1]=parseFloat(BaseKV_Transformer_Secondary[0]);
+        KVB_new[0]=parseFloat(KVB_new[1])*parseFloat(BaseKV_Transformer_Primary[0]/BaseKV_Transformer_Secondary[0]);
+        KVB_new[2]=parseFloat(KVB_new[1])*parseFloat(BaseKV_Transformer_Secondary[1]/BaseKV_Transformer_Primary[1]);
+        console.log(KVB_new);
+    }
+}
+console.log("Calculated KVB new : "+KVB_new)
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+var Idx;
+if (slected_Component == "G") {
+    Idx = parseInt(position) - 1;
+    console.log("Index :" + Idx);
+} else if (slected_Component == "M") {
+    Idx = parseInt(number_of_generator) + parseInt(position) - 1;
+    console.log("Index :" + Idx)
+}else if (slected_Component == "L") {
+    Idx = parseInt(number_of_generator) + parseInt(number_of_motors) + parseInt(position) + parseInt(number_of_tranformer) - 1;
+    console.log("Index :" + Idx);
+}
+
+var correct=1;
+var reg=[0,0,2,0,2,0,1,1];
+var j=0;
+var n=0;
+for (var i = 0; i < total_components; i++) {
+    
+ if(i<5){
+    
+   var data_real=((parseFloat(Z_old[i])*(parseFloat(BaseKV_GeneratorAndMotor[i])*parseFloat(BaseKV_GeneratorAndMotor[i]))*(parseFloat(BaseMVA[Idx])))/((parseFloat(KVB_new[reg[j]]))*(parseFloat(KVB_new[reg[j]]))*(parseFloat(BaseMVA[i])))).toFixed(4);
+   var data_img=((parseFloat(Z_old_imaginary[i])*(parseFloat(BaseKV_GeneratorAndMotor[i])*parseFloat(BaseKV_GeneratorAndMotor[i]))*(parseFloat(BaseMVA[Idx])))/((parseFloat(KVB_new[reg[j]]))*(parseFloat(KVB_new[reg[j]]))*(parseFloat(BaseMVA[i])))).toFixed(4); 
+    solution.real.push(data_real);
+    solution.img.push(data_img);
+ }else if(i<7){
+    var data_real=((parseFloat(Z_old[i])*(parseFloat(BaseKV_Transformer_Primary[n])*parseFloat(BaseKV_Transformer_Primary[n]))*(parseFloat(BaseMVA[Idx])))/((parseFloat(KVB_new[reg[j]]))*(parseFloat(KVB_new[reg[j]]))*(parseFloat(BaseMVA[i])))).toFixed(4);
+    var data_img=((parseFloat(Z_old_imaginary[i])*(parseFloat(BaseKV_Transformer_Primary[n])*parseFloat(BaseKV_Transformer_Primary[n]))*(parseFloat(BaseMVA[Idx])))/((parseFloat(KVB_new[reg[j]]))*(parseFloat(KVB_new[reg[j]]))*(parseFloat(BaseMVA[i])))).toFixed(4); 
+    solution.real.push(data_real);
+    solution.img.push(data_img);
+    n++;
+}else if(i<8){
+    var data_real=((parseFloat(BaseMVA[Idx])*parseFloat(Z_old[i]))/((parseFloat(KVB_new[reg[j]])*parseFloat(KVB_new[reg[j]])))).toFixed(4);
+    var data_img=((parseFloat(BaseMVA[Idx])*parseFloat(Z_old_imaginary[i]))/((parseFloat(KVB_new[reg[j]])*parseFloat(KVB_new[reg[j]])))).toFixed(4);
+    solution.real.push(data_real);
+    solution.img.push(data_img);
+}
+ j++;
+    console.log(data_real + " j " + data_img + " == " + Z_new[i] + " j " + Z_new_imaginary[i]);
+    if ((parseFloat(data_real) < parseFloat(Z_new[i])+0.01)&&(parseFloat(data_real)>parseFloat(Z_new[i])-0.01) && (parseFloat(data_img)< parseFloat(Z_new_imaginary[i])+0.01)&&(parseFloat(data_img)>parseFloat(Z_new_imaginary[i])-0.01)) {
+        console.log("Cool ");
+    } else {
+        correct=0;
+        console.log("not cool");
+    }
+
+}
+
+if(correct==1){
+    tries = 0;
+    document.getElementById('R1').innerHTML=Z_new[0]+"+j"+Z_new_imaginary[0];
+    document.getElementById('R2').innerHTML=Z_new[1]+"+j"+Z_new_imaginary[1];
+    document.getElementById('R3').innerHTML=Z_new[2]+"+j"+Z_new_imaginary[2];
+    document.getElementById('R4').innerHTML=Z_new[3]+"+j"+Z_new_imaginary[3];
+    document.getElementById('R5').innerHTML=Z_new[4]+"+j"+Z_new_imaginary[4];
+    document.getElementById('R6').innerHTML=Z_new[5]+"+j"+Z_new_imaginary[5];
+    document.getElementById('R7').innerHTML=Z_new[6]+"+j"+Z_new_imaginary[6];
+    document.getElementById('R8').innerHTML=Z_new[7]+"+j"+Z_new_imaginary[7];
+    document.getElementById('er').innerHTML='<div class="alert alert-danger" role="alert">CORRECT ANSWER</div>';
+    document.getElementById('Nxt').hidden = false;
+}else if(tries>=3){
+    const decision =  confirm(`You have got it wrong ${tries} times, Would you like to look at the answers?`);
+    if(decision){
+        tries = 0;    
+        document.getElementById('Znew0').value=parseFloat(solution.real[0]).toFixed(3);
+        document.getElementById('Znew1').value=parseFloat(solution.real[1]).toFixed(3);
+        document.getElementById('Znew2').value=parseFloat(solution.real[2]).toFixed(3);
+        document.getElementById('Znew3').value=parseFloat(solution.real[3]).toFixed(3);
+        document.getElementById('Znew4').value=parseFloat(solution.real[4]).toFixed(3);
+        document.getElementById('Znew5').value=parseFloat(solution.real[5]).toFixed(3);
+        document.getElementById('Znew6').value=parseFloat(solution.real[6]).toFixed(3);
+        document.getElementById('Znew7').value=parseFloat(solution.real[7]).toFixed(3);
+
+        document.getElementById('Znewi0').value=parseFloat(solution.img[0]).toFixed(3);
+        document.getElementById('Znewi1').value=parseFloat(solution.img[1]).toFixed(3);
+        document.getElementById('Znewi2').value=parseFloat(solution.img[2]).toFixed(3);
+        document.getElementById('Znewi3').value=parseFloat(solution.img[3]).toFixed(3);
+        document.getElementById('Znewi4').value=parseFloat(solution.img[4]).toFixed(3);
+        document.getElementById('Znewi5').value=parseFloat(solution.img[5]).toFixed(3);
+        document.getElementById('Znewi6').value=parseFloat(solution.img[6]).toFixed(3);
+        document.getElementById('Znewi7').value=parseFloat(solution.img[7]).toFixed(3);
+
+        document.getElementById('R1').innerHTML=parseFloat(solution.real[0]).toFixed(3)+"+j"+parseFloat(solution.img[0]).toFixed(3);
+        document.getElementById('R2').innerHTML=parseFloat(solution.real[1]).toFixed(3)+"+j"+parseFloat(solution.img[1]).toFixed(3);
+        document.getElementById('R3').innerHTML=parseFloat(solution.real[2]).toFixed(3)+"+j"+parseFloat(solution.img[2]).toFixed(3);
+        document.getElementById('R4').innerHTML=parseFloat(solution.real[3]).toFixed(3)+"+j"+parseFloat(solution.img[3]).toFixed(3);
+        document.getElementById('R5').innerHTML=parseFloat(solution.real[4]).toFixed(3)+"+j"+parseFloat(solution.img[4]).toFixed(3);
+        document.getElementById('R6').innerHTML=parseFloat(solution.real[5]).toFixed(3)+"+j"+parseFloat(solution.img[5]).toFixed(3);
+        document.getElementById('R7').innerHTML=parseFloat(solution.real[6]).toFixed(3)+"+j"+parseFloat(solution.img[6]).toFixed(3);
+        document.getElementById('R8').innerHTML=parseFloat(solution.real[7]).toFixed(3)+"+j"+parseFloat(solution.img[7]).toFixed(3);
+        document.getElementById('er').innerHTML='<div class="alert alert-danger" role="alert">ANSWER DISPLAYED</div>';
+        document.getElementById('Nxt').hidden = false;
+    }
+    else{
+        tries = tries+1;
+    }
+}
+else{
+    tries = tries+1;
+    document.getElementById('er').innerHTML='<div class="alert alert-danger" role="alert">WRONG ANSWER</div>';
+}
+}
+document.getElementById('Nxt').hidden = true;
+    </script>
+</body>
+
+</html>

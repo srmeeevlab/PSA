@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 3</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <nav class="nav-bar navbar-dark" style="background-color: #ff971d;">
+        <div class="container-fluid d-flex justify-content-between">
+            <a href="https://www.srmist.edu.in/" target="_blank"><img width="176px" height="59px" class="navbar-brand my-2 p-0" src="images/srmLogo.png"/></a>
+            <span class="navbar-text text-center">
+                <strong class="exp-title">Formation of Bus admittance Matrix (without mutual coupling)</strong>
+            </span>
+            <button type="button" class="my-auto info" data-bs-toggle="modal" data-bs-target="#helpModal" title="Help"><i class="bi bi-info-circle"></i></button>
+        </div>
+    </nav>
+    <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Answer the following questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="question"></div>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="a" id="answer_a" name="answer">
+                            <label id="answer_a_label" class="form-check-label" for="answer_a">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="b" id="answer_b" name="answer">
+                            <label id="answer_b_label" class="form-check-label" for="answer_b">
+                            </label>
+                        </div>
+                    </div>
+                    <div id="comments">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="verifyInteractive()">Verify</button>
+                    <button id="nextQuestion" type="button" class="btn btn-primary" disabled onclick="next()">Next</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body help-body">
+                    <strong>To open this menu again click on <i class="bi bi-info-circle"></i> on the top right.</strong><br><br>
+                    <div>
+                        The following rules to be followed for the formation of the bus admittance matrix <br>
+                        <ul>
+                            <li>The diagonal elements Yij equals the sum of the admittances directly connected to the bus i</li>
+                            <li>The off diagonal element Yij equals the negative of the admittances connected between buses i and j. if there is no element between the buses i and j then Yij equals to zero</li>
+                        </ul>
+                    </div>
+                    <br>
+                    <br>
+                    <table class="table table-striped">
+                        <thead class="sticky">
+                            <tr>
+                                <th scope="col">
+                                    Field   
+                                </th>
+                                <th scope="col">
+                                    Explanation
+                                </th>
+                                <th scope="col">
+                                    General Range
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>No of Transformers</td>
+                                <td>Number of transformers present in the network</td>
+                                <td>0 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>No of Transmission Lines</td>
+                                <td>Number of transmission lines present in the network</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the line</td>
+                                <td>The identification number to indicate the transmission line</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the sending end bus of the line</td>
+                                <td>TThe identification number to indicate the sending end bus of the transmission line</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the receiving end bus of the line</td>
+                                <td>The identification number to indicate the receiving end bus of the transmission line</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Resistance of the line in p.u</td>
+                                <td>The resistance of the transmission line in per unit quantities</td>
+                                <td>0 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Reactance of the line in p.u.</td>
+                                <td>The reactance of the transmission line in per unit quantities</td>
+                                <td>0.0001 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Half line charging susceptance in p.u</td>
+                                <td>The half-line charging susceptance of the transmission line in per unit quantities</td>
+                                <td>0 p.u. to 0.5 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the transformer</td>
+                                <td>The identification number to indicate the transformer</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the sending end bus of the transformer</td>
+                                <td>The identification number to indicate the sending end bus of the transformer</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Id number of the receiving end bus of the transformer</td>
+                                <td>The identification number to indicate the receiving end bus of the transformer</td>
+                                <td>1 to 100 (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Resistance of the transformer in p.u</td>
+                                <td>The resistance of the transformer in per unit quantities</td>
+                                <td>0 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Reactance of transformer in p.u</td>
+                                <td>The reactance of the transformer in per unit quantities</td>
+                                <td>0.0001 p.u. to 2 p.u. (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Off nominal tap ratio</td>
+                                <td>The off-nominal tap ratio of the transformer in per unit quantities. This ratio determines the additional transformation relative to the nominal transformer</td>
+                                <td>0.1 to 2 (but not restricted)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sectionOne" class="container mt-5 mb-3">
+        <h2>Data From Reactance Diagram</h2>
+        <div id="standard-values" class="row">  
+            <div class="col-md-6">
+                <label class="form-label" for="tlTot">Number of transmission lines</label>
+                <input class="form-control mb-2" type="number" name="tlTot" id="tlTot" step="1" min="0" value="1">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="tmTot">Number of transformers</label>
+                <input class="form-control mb-2" type="number" name="tmTot" id="tmTot" step="1" min="0" value="2">
+            </div>
+            <div>
+                <button class="btn btn-success mt-4" type="submit" onclick="startExp()">Next</button>
+            </div>
+        </div>
+    </div>
+    <div id="sectionTwo">
+        <div class="container mb-5">
+            <h2 class="stepTwo mb-3">Transmission Line Data</h2>
+            <div id="tlMatrix">
+    
+            </div>
+        </div>
+        <div class="container mb-5">
+            <h2 class="stepTwo mb-3">Transformer Data</h2>
+            <div id="tmMatrix">
+    
+            </div>
+        </div>
+    </div>
+    <div id="sectionThree" class="container mb-3">
+        <h2 class="stepTwo mb-3">Bus admitance matrix (Y-Bus)</h2>
+        <div id="resultWrapper" class="table-responsive">            
+        </div>
+    </div>
+    <div id="controls" class="container stepTwo mb-5">
+        <button type="reset" class="btn btn-dark" onclick="back()">Back</button>
+        <button type="submit" class="btn btn-success" onclick="calculate()">Generate Y-Bus</button>
+    </div>
+    <template>
+        <div id="tlRow" class="row mb-4 compDetTl">
+            <div class="col-md-4 disableDefault">
+                <label class="form-label" for="id-line">Id number of the line</label>
+                <input class="form-control mb-2" type="number" name="id-line" id="id-line" step="1" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="id-s-bus-line">Id number of the sending end bus of the line</label>
+                <input class="form-control mb-2"  type="number" name="id-s-bus-line" id="id-s-bus-line" step="1" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="id-r-bus-line">Id number of the receiving end bus of the line</label>
+                <input class="form-control mb-2" type="number" name="id-r-bus-line" id="id-r-bus-line" step="1" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="r-line">Resistance of line in p.u (R)</label>
+                <input class="form-control mb-2" type="number" name="r-line" id="r-line" step="any" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="x-line">Reactance of line in p.u (X)</label>
+                <input class="form-control mb-2" type="number" name="x-line" id="x-line" step="any">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="hcla-line">Half-line charging susceptance in p.u</label>
+                <input class="form-control mb-2" type="number" name="hcla-line" id="hcla-line" step="any" min="0">
+            </div>
+            <hr class="mt-4">
+        </div>
+        <div id="tmRow" class="row mb-4 compDetTm">
+            <div class="col-md-4 disableDefault">
+                <label class="form-label" for="id-tformer">Id number of the transformer</label>
+                <input class="form-control mb-2" type="number" name="id-tformer" id="id-tformer" step="1" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="id-t-bus-tformer">Id number of the tap side bus of the transformer</label>
+                <input class="form-control mb-2" type="number" name="id-t-bus-tformer" id="id-t-bus-tformer" step="1" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="id-nt-bus-tformer">Id number of the receiving end bus of the transformer</label>
+                <input class="form-control mb-2" type="number" name="id-nt-bus-tformer" id="id-nt-bus-tformer" step="1" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="r-tformer">Resistance of transformer in p.u (R)</label>
+                <input class="form-control mb-2" type="number" name="r-tformer" id="r-tformer" step="any" min="0">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="x-tformer">Reactance of transformer in p.u (X)</label>
+                <input class="form-control mb-2" type="number" name="x-tformer" id="x-tformer" step="any">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="a-tformer">Off nominal tap ratio</label>
+                <input class="form-control mb-2" type="number" name="a-tformer" id="a-tformer" step="any" min="0">
+            </div>
+            <hr class="mt-4">
+        </div>
+    </template>
+    <footer class="text-center py-4">
+        &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+    </footer>
+    <script src ="./js/complex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

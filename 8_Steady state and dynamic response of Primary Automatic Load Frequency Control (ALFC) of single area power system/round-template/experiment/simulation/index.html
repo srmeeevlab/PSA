@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 8</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <nav class="nav-bar navbar-dark mb-5" style="background-color: #ff971d;">
+        <div class="container-fluid d-flex justify-content-between">
+            <a href="https://www.srmist.edu.in/" target="_blank"><img width="176px" height="59px" class="navbar-brand my-2 p-0" src="images/srmLogo.png"/></a>
+            <span class="navbar-text text-center">
+                    <strong class="exp-title">Steady state and dynamic response of Primary Automatic Load Frequency Control (ALFC) of single area power system</strong>
+            </span>
+            <button type="button" class="my-auto info" data-bs-toggle="modal" data-bs-target="#helpModal" title="Help"><i class="bi bi-info-circle"></i></button>
+        </div>
+    </nav>
+    <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Answer the following questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="question"></div>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="a" id="answer_a" name="answer">
+                            <label id="answer_a_label" class="form-check-label" for="answer_a">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="b" id="answer_b" name="answer">
+                            <label id="answer_b_label" class="form-check-label" for="answer_b">
+                            </label>
+                        </div>
+                    </div>
+                    <div id="comments">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="verifyInteractive()">Verify</button>
+                    <button id="nextQuestion" type="button" class="btn btn-primary" disabled onclick="next()">Next</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body help-body">
+                    <strong>To open this menu again click on <i class="bi bi-info-circle"></i> on the top right.</strong><br><br>
+                    <div>
+                        Formulae needed for the execution of the experimet<br>
+                        <img class="img-fluid" src="./images/Exp8_Formula1.png" alt="Formula 1"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula2.png" alt="Formula 2"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula3.png" alt="Formula 3"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula4.png" alt="Formula 4"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula5.png" alt="Formula 5"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula6.png" alt="Formula 6"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula7.png" alt="Formula 7"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula8.png" alt="Formula 8"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula9.png" alt="Formula 9"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula10.png" alt="Formula 10"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula11.png" alt="Formula 11"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula12.png" alt="Formula 12"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula13.png" alt="Formula 13"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula14.png" alt="Formula 14"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula15.png" alt="Formula 15"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula16.png" alt="Formula 16"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula17.png" alt="Formula 17"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula18.png" alt="Formula 18"><br>
+                        <img class="img-fluid" src="./images/Exp8_Formula19.png" alt="Formula 19"><br><br>
+                    </div>
+                    <br>
+                    <br>
+                    <table class="table table-striped">
+                        <thead class="sticky">
+                            <tr>
+                                <th scope="col">
+                                    Field   
+                                </th>
+                                <th scope="col">
+                                    Explanation
+                                </th>
+                                <th scope="col">
+                                    General Range
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rated turbine power output (ΔP<sub>T</sub>)</td>
+                                <td>The capacity of the turbine in ALFC</td>
+                                <td>10 MW to 3000 MW (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Nominal frequency</td>
+                                <td>The operating frequency of the Power System</td>
+                                <td>50 Hz or 60 Hz</td>
+                            </tr>
+                            <tr>
+                                <td>Governor speed regulation (R)</td>
+                                <td>Speed regulation due to governor action</td>
+                                <td>0.0001 to 0.5 p.u (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Governor Time constant (T<sub>G</sub>)</td>
+                                <td>The response time of the Governor used in ALFC</td>
+                                <td>0.02 sec – 0.1 sec</td>
+                            </tr>
+                            <tr>
+                                <td>Turbine Time constant (T<sub>t</sub>)</td>
+                                <td>The response time of the Turbine used in ALFC</td>
+                                <td>0.2 sec – 2 sec</td>
+                            </tr>
+                            <tr>
+                                <td>Inertia constant of the generator (H)</td>
+                                <td>The stored energy in the generator with respect to its MVA rating</td>
+                                <td>2 sec – 8 sec</td>
+                            </tr>
+                            <tr>
+                                <td>Load change (ΔP<sub>D</sub>(s))</td>
+                                <td>Real Power (load) variation in the Power System. It depends on Rated Turbine power output (ΔP<sub>T</sub>)</td>
+                                <td>1 MW to 3000 MW</td>
+                            </tr>
+                            <tr>
+                                <td>Start Time</td>
+                                <td>It is the simulation start time</td>
+                                <td>0 sec</td>
+                            </tr>
+                            <tr>
+                                <td>End Time</td>
+                                <td>It is the simulation end time</td>
+                                <td>1 to 100 sec (Recommended value 5 sec) (but not restricted)</td>
+                            </tr>
+                            <tr>
+                                <td>Time Step</td>
+                                <td>Computing the value at each interval</td>
+                                <td>0.0001 to 0.1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <svg version="1.1" viewBox="0 0 538.07 220.9" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(106.41 8.8721)">
+             <g transform="translate(-82.446 82.446)"></g>
+             <path d="m-65.1 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <g transform="translate(-148.82 -35.28)">
+              <g transform="translate(55.185 .75595)">
+               <path d="m60.506 87.465-25.658 25.658m25.658-1e-5 -25.658-25.658m25.658 25.658a18.143 18.143 0 0 1-25.658 1e-5 18.143 18.143 0 0 1 0-25.658 18.143 18.143 0 0 1 25.658 3e-6 18.143 18.143 0 0 1 0 25.658z" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+               <path d="m31.758 99.872h10m-5-5v10" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+               <path d="m42.908 109.99h10" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+              </g>
+             </g>
+             <path d="m13.035 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m99.792 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m351.44 65.778h39.856m39.856 0-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <rect x="14.035" y="43.32" width="44.901" height="44.901" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <text x="14.947367" y="58.032185" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan id="kgSvg" x="14.947367" y="58.032185" style="stroke-width:.26458">K<tspan style="baseline-shift:sub;font-size:65%">G</tspan></tspan></text>
+             <text x="14.823062" y="78.863182" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="tgSvg" x="14.823062" y="78.863182" style="stroke-width:.26458">1+sT<tspan style="baseline-shift:sub;font-size:65%">G</tspan></tspan></text>
+             <path d="m16.486 65.648h40" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <rect x="100.79" y="43.32" width="44.901" height="44.901" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <text x="101.70419" y="58.556183" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="ktSvg" x="101.70419" y="58.556183" style="stroke-width:.26458">K<tspan style="baseline-shift:sub;font-size:65%">t</tspan></tspan></text>
+             <text x="101.58016" y="79.486183" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="ttSvg" x="101.58016" y="79.486183" style="stroke-width:.26458">1+sT<tspan style="baseline-shift:sub;font-size:65%">t</tspan></tspan></text>
+             <path d="m103.24 66.271h40" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <g transform="translate(117.99 -3.8643e-5)">
+              <rect x="187.55" y="43.32" width="44.901" height="44.901" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+              <text x="188.4613" y="58.654205" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="kpSvg" x="188.4613" y="58.654205" style="stroke-width:.26458">K<tspan style="baseline-shift:sub;font-size:65%">P</tspan></tspan></text>
+              <text x="188.33728" y="79.486206" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="tpSvg" x="188.33728" y="79.486206" style="stroke-width:.26458">1+sT<tspan style="baseline-shift:sub;font-size:65%">P</tspan></tspan></text>
+              <path d="m190 66.271h40" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             </g>
+             <text x="-106.49462" y="53.344112" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="-106.49462" y="53.344112" style="stroke-width:.26458">ΔP<tspan style="baseline-shift:sub;font-size:65%">C</tspan>(s)</tspan></text>
+             <text x="157.92613" y="53.344131" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="157.92613" y="53.344131" style="stroke-width:.26458">ΔP<tspan style="baseline-shift:sub;font-size:65%">T</tspan> = ΔP<tspan style="baseline-shift:sub;font-size:65%">G</tspan> </tspan></text>
+             <text x="382.73996" y="53.344143" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="382.73996" y="53.344143" style="stroke-width:.26458">Δf(s)</tspan></text>
+             <path d="m146.69 65.778h39.856m39.856 0-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <g transform="translate(142.68 -35.28)">
+              <g transform="translate(55.185 .75595)">
+               <path d="m60.506 87.465-25.658 25.658m25.658-1e-5 -25.658-25.658m25.658 25.658a18.143 18.143 0 0 1-25.658 1e-5 18.143 18.143 0 0 1 0-25.658 18.143 18.143 0 0 1 25.658 3e-6 18.143 18.143 0 0 1 0 25.658z" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+               <path d="m31.758 99.872h10m-5-5v10" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+               <path d="m42.805 88.872h10" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+              </g>
+             </g>
+             <path d="m304.54 65.778-9.8079 9.8022m9.8079-9.8022-9.8171-9.8174m-30.039 9.8174h39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m245.54 46.631-9.8022-9.8079m9.8022 9.8079 9.8174-9.8171m-9.8174-30.039v39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <text x="229.15822" y="-0.84159201" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="229.15822" y="-0.84159201" style="stroke-width:.26458">ΔP<tspan style="baseline-shift:sub;font-size:65%">D</tspan>(s) </tspan></text>
+             <path d="m-45.953 84.91 9.8022 9.8079m-9.8022-9.8079-9.8174 9.8171m9.8174 30.039v-39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <rect transform="translate(-82.446 82.446)" x="14.035" y="43.32" width="44.901" height="44.901" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <text transform="translate(-82.446 82.446)" x="14.947367" y="58.032185" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.75;stroke-width:.26458" xml:space="preserve"><tspan x="14.947367" y="58.032185" style="stroke-width:.26458">1</tspan></text>
+             <text transform="translate(-82.446 82.446)" x="14.823062" y="78.863182" style="fill:#000000;font-family:sans-serif;font-size:10.583px;line-height:1.25;stroke-width:.26458" xml:space="preserve"><tspan id="rSvg" x="14.823062" y="78.863182" style="stroke-width:.26458">R</tspan></text>
+             <path transform="translate(-82.446 82.446)" d="m16.486 65.648h40" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+             <path d="m-45.953 211.52h437.25v-145.75m-437.25 105.89 9.8022 9.8079m-9.8022-9.8079-9.8174 9.8171m9.8174 30.039v-39.856" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+            </g>
+        </svg>         
+        <div>
+            <div class="mt-3">
+                <div class="row">
+                    <h3>Parameters for Modelling Primary ALFC</h3>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="ptr">Rated turbine power output (ΔP<sub>T</sub>)</label>
+                            <input class="form-control" id="ptr" type="number" step="any" value="300" min="0">
+                            <span class="input-group-text">MW</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="fnom">Nominal frequency</label>
+                            <input class="form-control" id="fnom" type="number" step="any" value="50" min="0">
+                            <span class="input-group-text">Hz</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="rpu">Governor speed regulation (R)</label>
+                            <input class="form-control" id="rpu" type="number" step="any" value="0.05" min="0">
+                            <span class="input-group-text">p.u</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="h">Inertia constant of the generator (H)</label>
+                            <input class="form-control" id="h" type="number" step="any" value="0.5" min="0">
+                            <span class="input-group-text">s</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="tt">Turbine Time constant (T<sub>t</sub>)</label>
+                            <input class="form-control" id="tt" type="number" step="any" value="0.5" min="0">
+                            <span class="input-group-text">s</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="tg">Governor Time constant (T<sub>G</sub>)</label>
+                            <input class="form-control" id="tg" type="number" step="any" value="0.2" min="0">
+                            <span class="input-group-text">s</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="dpl">Load change (ΔP<sub>D</sub>(s))</label>
+                            <input class="form-control" id="dpl" type="number" min="0" step="any" value="60">
+                            <span class="input-group-text">MW</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="frequency">Calculated steady state frequency</label>
+                            <input class="form-control" id="frequency" type="number">
+                            <span class="input-group-text">Hz</span>
+                        </div>  
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="frequencyError">Calculated steady state frequency error</label>
+                            <input class="form-control" id="frequencyError" type="number">
+                            <span class="input-group-text">Hz</span>
+                        </div>  
+                    </div>  
+                </div>
+            </div>
+            <div class="row">
+                <h3>Simulation Parameters</h3>
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="startTime">Start Time</label>
+                        <input class="form-control control" id="startTime" type="number" step="any" min="0" value="0">  
+                        <span class="input-group-text">s</span>    
+                    </div>
+                </div> 
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="endTime">End Time</label>
+                        <input class="form-control control" id="endTime" type="number" step="any" min="0" value="60"> 
+                        <span class="input-group-text">s</span>     
+                    </div>
+                </div> 
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="timeStep">Time Step</label>
+                        <input class="form-control  control" id="timeStep" type="number" step="any" min="0.001" value="0.001">     
+                        <span class="input-group-text">s</span> 
+                    </div> 
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="form-check form-switch  mb-3">
+                    <label class="form-check-label" for="auto">Auto Plot</label>
+                    <input class="form-check-input" type="checkbox" id="auto" onchange=toggleAuto()>
+                </div> 
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success mb-3" type="submit" onclick="updateValues();">Verify</button>
+            </div>
+        </div>
+        <div id="result" class="mb-2">
+            <h1>
+                Results
+            </h1>
+            <br>
+            <h4>
+                <span id="ssValueLabel"></span><span id="ssValue"></span><br>
+                <span id="ssErrorLabel"></span><span id="ssError"></span>
+            </h4>
+            <canvas id="dynamicResponse" ></canvas>
+        </div>
+    </div>
+    <footer class="text-center py-4">
+        &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js"></script>
+    <script src="./js/eqn1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
