@@ -89,7 +89,18 @@
       });
     </script>
     
-
+    <style>
+      @media (min-width: 375px ) {
+iframe{
+  height: 1000px; width: 325px;
+}
+}
+@media (min-width:800px){
+  iframe{
+    height: 1000px; width: 1000px;
+  }
+}
+    </style>
   </head>
   <body class="p-0 container-fluid vlabs-page d-flex flex-column justify-content-between">
     <!--Google Tag Manager (noscript)-->
@@ -149,7 +160,7 @@
           <br>
 
           <!-- <p style="font-size: 16px;"><a target="_blank" href="round-template/experiment/simulation/simulator.html"> Click here for simulation</a></p> -->
-          <iframe id="fraDisabled" src="round-template/experiment/simulation/index.html" frameborder="0" scrolling="no" onMyLoad="disableContextMenu();" style="height: 2000px; width: 1200px;"> </iframe>
+          <iframe id="fraDisabled" src="round-template/experiment/simulation/index.html" frameborder="0" scrolling="no" onMyLoad="disableContextMenu();" > </iframe>
         </div>
       </div>
     </div>

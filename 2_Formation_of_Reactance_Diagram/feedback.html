@@ -27,6 +27,18 @@
     
     <!-- BEGIN INCLUDE MARKDOWN FILES USING ZERO MD JS -->
     <script src="assets/js/webcomponents-loader.min.js"></script>
+    <style>
+      @media (min-width: 375px ) {
+iframe{
+  height: 1000px; width: 325px;
+}
+}
+@media (min-width:800px){
+  iframe{
+    height: 1000px; width: 1000px;
+  }
+}
+    </style>
     <script>
       // Set global configs. Declare before importing `zero-md` element.
       // These settings will apply to all instances of `zero-md`.
@@ -67,7 +79,7 @@
         </div>            
         <div class="vlabs-page-content col col-sm-7 col-lg-10 pr-5 pb-4">
           <div class="container pt-3 text-center">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfssU_lgHa0JsUYktnbmpWve5_YphmoERkoOkUx4mLmimrH2w/viewform" frameborder="0" style="height: 1000px; width: 1000px;"></iframe>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfssU_lgHa0JsUYktnbmpWve5_YphmoERkoOkUx4mLmimrH2w/viewform" frameborder="0" ></iframe>
           </div>
         </div>
       </div>
