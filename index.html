@@ -16,17 +16,50 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="HandheldFriendly" content="true">
+<style>
 
+
+@media (min-width: 375px ) {
+  .text {
+    font-size: 15px;
+  }
+  .logo{
+    width: 80px;
+    height: 40px;
+  }
+  .navitem{
+      font-size: 10px;
+  }
+  .content{
+      font-size: 10px;
+  }
+}
+@media (min-width:800px){
+    .text{
+        font-size: 28px;
+    }
+    .logo{
+        width: 164px;
+        height: 70px;
+    }
+    .navitem{
+      font-size: 15px;
+  }
+  .content{
+      font-size: 15px;
+  }
+}
+</style>
 </head>
 <body>
     <div class="wrapper">
         <header>
             <div class="row">
-                <div class="col-lg-6 col-sm-6 col-xs-6" style="width: 50%;">
+                <div class="col-lg-6 col-sm-6 col-xs-6 text" style="width: 50%;">
                     Power System Simulation Lab
                 </div>
                 <div class="col-lg-6 col-sm-6 col-xs-6" style="width: 50%;">
-                    <img src="./Assets/Images/SRM-logo.png" alt="SRM logo" style="float:right; ">
+                    <img src="./Assets/Images/SRM-logo.png" alt="SRM logo" style="float:right; " class="logo">
                 </div>
             </div>
         </header>
@@ -37,23 +70,23 @@
   <input type="radio" name="slider" id="blog" checked>
  
   <nav>
-        <label for="home" class="home"><i class="fas fa-file"></i>Introduction</label>
-        <label for="blog" class="blog"><i class="fas fa-cogs"></i>List of Experiments</label>
+        <label for="home" class="home"> <span class="navitem">Introduction</span></label>
+        <label for="blog" class="blog"><span class="navitem">List of Experiments</span></label>
         <div class="slider"></div>
   </nav>
   <br>
   <hr>
   <section>
     <div class="content content-1">
-      <div class="title">Introduction</div>
+      <div class="title ">Introduction</div>
       <p>
         The main objective of this virtual lab is to study and analyze the fundamentals of power system analysis to benefit the students and the research scholar. The outcome of this virtual lab explains the importance of the practical knowledge for the Engineering students. This also invokes the mind of students to analyses the given topic both manually as well as practically. This gives a clear view on the modelling of power system, formation of Y-bus, power flow analysis and explains the practical use. The simulation, functioning, observation, inference, survey, advantages has been completely analyzed in this virtual lab platform.
         This helps to acquire practical learning experiences in the field of power system by visualizations in digital platform.
       </p>
     </div>
-    <div class="content content-2">
+    <div class="content content-2 content">
       <div class="title">List of Experiments</div>
-      <div class="container ml-5 scroll" style="width: 100%;">
+      <div class="container scroll" style="width: 100%;">
         <div class="container headingBackGround mt-5">
             <table class="table mb-5 pb-5">
             <thead>
