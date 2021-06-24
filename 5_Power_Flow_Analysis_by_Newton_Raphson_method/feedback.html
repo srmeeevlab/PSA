@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,16 +13,17 @@
     <meta name="theme-color" content="#4076e0">
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#4076e0">
-
-    <title>SRM V-Lab: Theory</title>
+    
+    <title>SRM V-Lab: Feedback</title>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/vlabs-style.css">  
+    <link rel="stylesheet" href="assets/css/vlabs-style.css">   
     <script src="assets/js/jquery-3.4.1.slim.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-
+    
+    <!-- END INCLUDE HEADER AND FOOTER -->
     
     <!-- BEGIN INCLUDE MARKDOWN FILES USING ZERO MD JS -->
     <script src="assets/js/webcomponents-loader.min.js"></script>
@@ -30,7 +32,6 @@
       // These settings will apply to all instances of `zero-md`.
       window.ZeroMd = {
           config: {
-              // Basically, we want to point all library references to our local ones instead.
               cssUrls: [ 'assets/css/github-markdown.min.css',
                          'assets/css/vlabs-style.css'
                        ]
@@ -39,11 +40,10 @@
     </script>
     <script type="module" src="assets/js/zero-md.min.js"></script>
     <!-- END INCLUDE MARKDOWN FILES USING ZERO MD JS -->    
-
   </head>
   <body class="p-0 container-fluid vlabs-page d-flex flex-column justify-content-between">
     <header class="vlabs-header sticky-top bg-white">
-      <nav class="p-0 navbar  navbar-light">
+      <nav class="p-0 navbar navbar-expand-xxl navbar-light">
         <a href="https://srmist.edu.in" class="navbar-brand">
           <img src="assets/images/srm-logo.png" alt="SRM logo">
         </a>
@@ -54,36 +54,20 @@
     </header>
     <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
       <div class="row flex-grow-1 px-4">
-        <div class="nav flex-column col col-sm-3 col-lg-2 sidebar collapse" id="headerNavbar">
-          <a href="index.html" class="py-2"> Aim </a>
-          <a href="theory.html" class="py-2"> Theory </a>
-          <a href="pretest.html" class="py-2"> Pre Test </a>
-          <a href="procedure.html" class="py-2"> Procedure </a>
-          <a href="simulation.html" class="py-2"> Simulation </a>
-          <a href="posttest.html" class="py-2"> Post Test </a>
-          <a href="references.html" class="py-2"> References </a>
+        <div id="headerNavbar" class="nav flex-column col col-sm-3 col-lg-2 sidebar collapse">
+          <a href="index.html" class="py-2">Aim</a>
+          <a href="theory.html" class="py-2">Theory</a>
+          <a href="pretest.html" class="py-2">Pre Test</a>
+          <a href="procedure.html" class="py-2">Procedure</a>
+          <a href="simulation.html" class="py-2">Simulation</a>
+          <a href="posttest.html" class="py-2">Post Test</a>
+          <a href="references.html" class="py-2">References</a>
           <a href="feedback.html" class="py-2">Feedback</a>
+        </div>            
+        <div class="container pt-3 text-center">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd08lljGbd5M-Fw1T_IGTS3y16ydRdQRD5ZrJ2JNRJqq0txSw/viewform" frameborder="0" style="height: 1000px; width: 1000px;"></iframe>
         </div>
-        <div class="vlabs-page-content col col-sm-7 col-lg-10 pr-5 pb-4">
-          <zero-md src="round-template/experiment/experiment-name.md">
-            <template>
-              <style>
-                div {
-                    font-family: 'Raleway', sans-serif;
-                }
 
-                h1, h2 { 
-                    margin: 0.5em 0;
-                    color: #2C99CE;
-                    text-align: center;
-                }
-              </style>
-            </template>
-          </zero-md>  
-          <h3 class="page-name">Theory</h3>              
-          <zero-md src="round-template/experiment/theory.md">
-          </zero-md>
-        </div>
       </div>
     </div>
   </body>
