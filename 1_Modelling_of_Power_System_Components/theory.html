@@ -54,7 +54,7 @@
     </header>
     <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
       <div class="row flex-grow-1 px-4">
-        <div class="nav flex-column col col-sm-3 col-lg-2 sidebar collapse" id="headerNavbar">
+        <div class="nav flex-column col col-sm-3 col-lg-2 sidebar collapse show" id="headerNavbar">
           <a href="index.html" class="py-2"> Aim </a>
           <a href="theory.html" class="py-2"> Theory </a>
           <a href="pretest.html" class="py-2"> Pre Test </a>
@@ -86,5 +86,12 @@
         </div>
       </div>
     </div>
+    <script>
+      if (screen.width<400) {
+        $('#headerNavbar').collapse({
+          show: false
+        })
+      }
+        </script>
   </body>
 </html>
