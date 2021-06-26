@@ -98,12 +98,13 @@
       </script>
     </footer>
     <script>
-      if (screen.width<400) {
-        $('#headerNavbar').collapse({
-          show: false
-        })
-      }
-        </script>
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            $('#headerNavbar').collapse({
+            show: false
+          })
+          } 
+          </script>
     <!-- BEGIN BASE JS -->
     <script src="assets/plugins/pace/pace.min.js"></script>
     <script src="assets/plugins/jquery/jquery.min.js"></script>

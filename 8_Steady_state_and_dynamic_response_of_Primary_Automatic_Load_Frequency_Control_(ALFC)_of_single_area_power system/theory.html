@@ -93,11 +93,12 @@
       </script>
     </footer>
     <script>
-      if (screen.width<300) {
-        $('#headerNavbar').collapse({
-          show: false
-        })
-      }
-        </script>
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            $('#headerNavbar').collapse({
+            show: false
+          })
+          } 
+          </script>
   </body>
 </html>

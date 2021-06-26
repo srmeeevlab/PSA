@@ -96,12 +96,13 @@
       </script>
     </footer>
     <script>
-      if (screen.width<400) {
-        $('#headerNavbar').collapse({
-          show: false
-        })
-      }
-        </script>
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            $('#headerNavbar').collapse({
+            show: false
+          })
+          } 
+          </script>
     <script src="round-template/experiment/pretest.js"></script>
 
     <!-- BEGIN TO TOP -->
