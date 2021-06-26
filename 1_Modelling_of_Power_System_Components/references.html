@@ -121,11 +121,12 @@
     <script src="assets/js/index.js"></script>
     <!-- END PAGE LEVEL JS -->
     <script>
-      if (screen.width<400) {
-        $('#headerNavbar').collapse({
-          show: false
-        })
-      }
-        </script>
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            $('#headerNavbar').collapse({
+            show: false
+          })
+          } 
+          </script>
   </body>
 </html>
