@@ -15,7 +15,6 @@
     <meta name="msapplication-navbutton-color" content="#4076e0">
     
     <title>SRM V-Lab: Pre test</title>
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -89,6 +88,12 @@
         </div>
       </div>
     </div>
+    <footer class="text-center py-4" style="background-color: #f9f6f7;">
+      &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+      <script>
+          document.getElementById("year").innerHTML = new Date().getFullYear();
+      </script>
+    </footer>
     <script>
       if (screen.width<400) {
         $('#headerNavbar').collapse({
