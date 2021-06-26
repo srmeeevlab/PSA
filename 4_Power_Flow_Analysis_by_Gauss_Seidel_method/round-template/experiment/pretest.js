@@ -16,18 +16,20 @@
         // ...add an HTML radio button
         answers.push(
           `<label>
-            <input type="radio" name="question${questionNumber}" value="${letter}">
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-          </label>`
+          <input type="checkbox" name="question${questionNumber}" value="${letter}"/>
+
+          ${letter} :
+          ${currentQuestion.answers[letter]}
+        </label>
+        <br/>`
         );
       }
 
       // add this question and its answers to the output
       output.push(
         `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join("")} </div>`
-      );
+        <div class="answers"> ${answers.join("")} </div><br>`
+        );
     });
 
     // finally combine our output list into one string of HTML and put it on the page
@@ -63,7 +65,11 @@
     });
 
     // show number of correct answers out of total
-    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+    alert(`${numCorrect} out of ${myQuestions.length} is correct`);
+    resultsContainer.innerHTML = `
+    <div class="alert alert-primary center" role="alert">
+    ${numCorrect} out of ${myQuestions.length} is correct
+    <div>`;
   }
 
   const quizContainer = document.getElementById("quiz");
@@ -80,56 +86,56 @@
 
   const myQuestions = [
     {
-      question: "Power Flow analysis is supported for",
+      question: "The variables specified in slack bus is",
       answers: {
-        a: "Frequency control",
-        b: "System planning",
-        c: "Stability studies",
-        d: "Fault control"
+        a: "a. |V|,&#8706;",
+        b: "P, Q",
+        c: "P, |V|",
+        d: "Q, |V|"
       },
-      correctAnswer: "b"
+      correctAnswer: "a"
     },
     {
-      question: "For load flow analysis, the quantities specified at load bus is",
+      question: "In a power flow analysis, the reference bus is known as",
       answers: {
-        a: "P and |V|",
-        b: "P and Q",
-        c: "P and Q",
-        d: "Q and |V|"
-      },
-      correctAnswer: "b"
-    },
-    {
-      question: "In load flow study, the load at the bus is denoted as",
-      answers: {
-        a: "A voltage dependent impedance at bus",
-        b: "Constant real and reactive powers drawn from bus",
-        c: "Constant impedance connected at bus",
-        d: "Constant current drawn from the bus"
-      },
-      correctAnswer: "b"
-    },
-    {
-      question: "While conducting power flow analysis, for the slack bus, specified quantities of the swing bus are",
-      answers: {
-        a: "Real power injected and reactive power injected",
-        b: "Voltage magnitude and voltage phase angle",
-        c: "Real power injected and voltage magnitude",
-        d: "Real power injected and voltage phase angle"
+        a: "PV buses",
+        b: " PQ buses",
+        c: "Slack buses",
+        d: "Load bus"
       },
       correctAnswer: "c"
     },
     {
-      question: "It is required to develop mathematical model for power flow analysis. It is true that",
+      question: "In a four-bus power system, bus 1 is the slack bus, buses 2 and 3 are load buses and bus 4 is a  generator bus. When power flow analysis is carried out by N.R. method, Jacobian matrix will be of size",
       answers: {
-        a: "both the network equations and bus power equations are non-linear",
-        b: "both the network equations and bus power equations are linear",
-        c: "network equations are linear and bus power equations are non-linear",
-        d: "network equations are non-linear and bus power equations are linear"
+        a: "3 x 3",
+        b: "4 x 4",
+        c: "5 x 5",
+        d: "5 x 6"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "In a four-bus power system, bus 1 is the slack bus. The Jacobian matrix used in N.R. method is of size 5 x 5. This power system",
+      answers: {
+        a: "has 4 number of load buses",
+        b: "has 3 number of load buses",
+        c: "has 2 number of load buses",
+        d: "has one load bus"
+      },
+      correctAnswer: "c"
+    }, 
+    {
+      question: "A 7-bus power system has one slack bus and 3 generator buses. The Jacobian matrix required for NR power flow problem is of size",
+      answers: {
+        a: "12 x 12",
+        b: "18 x 18",
+        c: "9 x 9",
+        d: "21 x 21"
       },
       correctAnswer: "c"
     }//Dont add comma here
-    ];
+  ];
 
 // ---------------------------- End -------------------------------
 

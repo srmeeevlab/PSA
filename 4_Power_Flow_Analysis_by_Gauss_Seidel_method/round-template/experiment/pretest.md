@@ -2,33 +2,33 @@
 #### Please attempt the following questions
 
 <br>
-Q 1. Power Flow analysis is supported for<br>
-a. Frequency control<br>
-<b>b. System planning</b><br>
-c. Stability studies<br>
-d. Fault control<br><br>
+Q 1. The variables specified in slack bus is--------------<br>
+<b>a. |V|,&#8706;</b><br>
+b. P, Q<br>
+c. P, |V|<br>
+d. Q, |V|<br><br>
 
 
-Q 2. For load flow analysis, the quantities specified at load bus are<br>
-a. P and |V|</br>
-<b>b. P and Q</b><br>
-c. P and Q<br>
-d. Q and |V|<br><br>
+Q 2. In a power flow analysis, the reference bus is known as<br>
+a. PV buses</br>
+b. PQ buses<br>
+<b>c. Slack buses</b><br>
+d. Load bus <br><br>
 
-Q 3. In power flow study, the load at the bus is denoted as<br>
-a. A voltage dependent impedance at bus<br>
-<b>b. Constant real and reactive powers drawn from bus</b><br>
-c. Constant impedance connected at bus<br>
-d. Constant current drawn from the bus<br><br>
+Q 3. In a four-bus power system, bus 1 is the slack bus, buses 2 and 3 are load buses and bus 4 is a  generator bus. When power flow analysis is carried out by N.R. method, Jacobian matrix will be of size<br>
+a. 3 x 3<br>
+b. 4 x 4<br>
+<b>c. 5 x 5</b><br>
+d. 5 x 6<br><br>
 
-Q 4. While conducting power flow analysis, the specified quantities of the swing bus are<br>
-a. Real power injected and reactive power injected<br>
-b. Voltage magnitude and voltage phase angle<br>
-<b>c. Real power injected and voltage magnitude</b><br>
-d. Real power injected and voltage phase angle<br><br>
+Q 4. In a four-bus power system, bus 1 is the slack bus. The Jacobian matrix used in N.R. method is of size 5 x 5. This power system <br>
+a. has 4 number of load buses<br>
+b. has 3 number of load buses<br>
+<b>c. has 2 number of load buses</b><br>
+d. has one load bus<br><br>
 
-Q 5. It is required to develop mathematical model for power flow analysis. It is true that<br>
-a. both the network equations and bus power equations are non-linear.<br>
-b. both the network equations and bus power equations are linear.<br>
-<b>c. network equations are linear and bus power equations are non-linear.</b><br>
-d. network equations are non-linear and bus power equations are linear.
+Q 5. A 7-bus power system has one slack bus and 3 generator buses. The Jacobian matrix required for NR power flow problem is of size<br>
+a. 12 x 12<br>
+b. 18 x 18<br>
+<b>c. 9 x 9</b><br>
+d. 21 x 21

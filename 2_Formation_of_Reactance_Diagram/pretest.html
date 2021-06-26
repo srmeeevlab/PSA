@@ -15,7 +15,6 @@
     <meta name="msapplication-navbutton-color" content="#4076e0">
     
     <title>SRM V-Lab: Pre test</title>
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -57,6 +56,7 @@
     <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
       <div class="row flex-grow-1 px-4">
         <div class="nav flex-column col col-sm-3 col-lg-2 sidebar collapse show" id="headerNavbar">
+          <a href="../index.html" class="py-2">Home</a>
           <a href="index.html" class="py-2">Aim</a>
           <a href="theory.html" class="py-2">Theory</a>
           <a href="pretest.html" class="py-2">Pre Test</a>
@@ -89,7 +89,12 @@
         </div>
       </div>
     </div>
-  
+    <footer class="text-center py-4" style="background-color: #f9f6f7;">
+      &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+      <script>
+          document.getElementById("year").innerHTML = new Date().getFullYear();
+      </script>
+    </footer>
     <script>
       var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
           if (isMobile) {

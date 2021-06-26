@@ -24,7 +24,7 @@
                 <a href="https://www.srmist.edu.in/" target="_blank"><img width="176px" height="59px" class="navbar-brand my-2 p-0" src="images/srmLogo.png"/></a>
             </span>
             <span class="navbar-text text-center">
-                <strong class="exp-title">Formation of Reactance Diagram Part 1</strong>
+                <strong class="exp-title">Formation of Reactance Diagram (Example 1)</strong>
             </span>
             <button id="info" type="button" class="my-auto" data-bs-toggle="modal" data-bs-target="#helpModal" title="Help"><i class="bi bi-info-circle"></i></button>
         </div>
@@ -216,6 +216,9 @@
     </div>
     <!-- Body of the expreiment -->
     <div class="container mt-4">
+        <div class="d-flex justify-content-end">
+            <a id="Nxt" class="btn btn-success mb-5" href="./index(Exp2).html">Go to Example 2 &#11122;</a>
+        </div>
         <div class="text-center">
             <img src="images/Q1_optimised.png" width="100%" alt="Question 2 for Experiment 2">
         </div>
@@ -420,15 +423,8 @@
                 <text transform="matrix(0 -.92154 .92154 0 0 4.6153)" x="-27.782015" y="191.87819" style="fill:#000000;font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25;stroke-width:.15231" xml:space="preserve"><tspan x="-27.782015" y="191.87819" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"><tspan id="R3"></tspan></tspan><tspan x="-27.782015" y="196.72888" style="font-family:sans-serif;font-size:3.8806px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;stroke-width:.15231"/></text>
                </svg>      
         </div>
-        <div class="d-flex justify-content-end">
-            <a id="Nxt" class="btn btn-success mb-5" href="./index(Exp2).html">Next Question</a>
-        </div>
-
     </div>
-    <footer class="text-center py-4" style="background-color: #f9f6f7;">
-        &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
-    </footer>
-
+  
     <!-- <script src="/script/app2.js"></script> -->
     <script>
         window.onbeforeunload = function() {
@@ -766,7 +762,6 @@ if(correct==1){
     document.getElementById('R7').innerHTML=Z_new[6]+"+j"+Z_new_imaginary[6];
     document.getElementById('R8').innerHTML=Z_new[7]+"+j"+Z_new_imaginary[7];
     document.getElementById('er').innerHTML='<div class="alert alert-danger" role="alert">CORRECT ANSWER</div>';
-    document.getElementById('Nxt').hidden = false;
 }else if(tries>=3){
     const decision =  confirm(`You have got it wrong ${tries} times, Would you like to look at the answers?`);
     if(decision){
@@ -798,7 +793,6 @@ if(correct==1){
         document.getElementById('R7').innerHTML=parseFloat(solution.real[6]).toFixed(3)+"+j"+parseFloat(solution.img[6]).toFixed(3);
         document.getElementById('R8').innerHTML=parseFloat(solution.real[7]).toFixed(3)+"+j"+parseFloat(solution.img[7]).toFixed(3);
         document.getElementById('er').innerHTML='<div class="alert alert-danger" role="alert">ANSWER DISPLAYED</div>';
-        document.getElementById('Nxt').hidden = false;
     }
     else{
         tries = tries+1;
@@ -809,7 +803,6 @@ else{
     document.getElementById('er').innerHTML='<div class="alert alert-danger" role="alert">WRONG ANSWER</div>';
 }
 }
-document.getElementById('Nxt').hidden = true;
     </script>
 </body>
 
