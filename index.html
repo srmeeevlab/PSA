@@ -28,10 +28,14 @@
     height: 40px;
   }
   .navitem{
-      font-size: 10px;
+      font-size: 8px;
   }
   .content{
       font-size: 10px;
+  }
+  .img{
+      height: 50px;
+
   }
 }
 @media (min-width:800px){
@@ -47,6 +51,10 @@
   }
   .content{
       font-size: 15px;
+  }
+  .img{
+      height: 200px;
+      width: 200px;
   }
 }
 </style>
@@ -68,10 +76,12 @@
 
   <input type="radio" name="slider"  id="home">
   <input type="radio" name="slider" id="blog" checked>
+  <input type="radio" name="slider" id="code">
  
   <nav>
         <label for="home" class="home"> <span class="navitem">Introduction</span></label>
         <label for="blog" class="blog"><span class="navitem">List of Experiments</span></label>
+        <label for="code" class="code"><span class="navitem">Team Details</span></label>
         <div class="slider"></div>
   </nav>
   <br>
@@ -145,16 +155,126 @@
             </table>
         
         </div>
+     
     </div>    
     </div>
+    <div class="content content-3 content">
+        <div class="container scroll">
+            <p>
+              <b> Team Details:</b> <br>
+                Department of Electrical and Electronics Engineering <br>
+                SRM Institute of Science and Technology, Kattankulathur <br>
+                <hr>
+               <b> Faculty:</b> <br> <br>
+               <table class="table">
+                   <tbody>
+                       <tr>
+                           <td>
+                               <img src="/Assets/faculty_images/Maharajan.png" alt="" srcset="" class="img">
+                           </td>
+                        
+                           <td>
+                                <p>
+                                    Dr.D.Maharajan <br>
+                                Assistant Professor <br>
+                                Email : <a href="mailto:maharajd@srmist.edu.in">maharajd@srmist.edu.in</a>
+                                <br>
+                                <a href="https://www.srmist.edu.in/engineering/eee/faculty/d-maharajan">https://www.srmist.edu.in/engineering/eee/faculty/d-maharajan</a>
 
+                                </p>
+                           </td>
+                       </tr>
+                       <tr>
+                        <td>
+                            <img src="/Assets/faculty_images/usha.png" alt="" srcset="" class="img">
+                        </td>
+                     
+                        <td>
+                             <p>
+                                Dr.S.Usha
+                                <br>
+                             Assistant Professor <br>
+                             Email : <a href="mailto:ushas@srmist.edu.in">ushas@srmist.edu.in</a>
+                             <br>
+                             <a href="https://www.srmist.edu.in/engineering/eee/faculty/dr-s-usha">https://www.srmist.edu.in/engineering/eee/faculty/dr-s-usha</a>
+
+                             </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="/Assets/faculty_images/Ramya.png" alt="" srcset="" class="img">
+                        </td>
+                     
+                        <td>
+                             <p>
+                                Dr.R.Ramya
+                                <br>
+                             Assistant Professor <br>
+                             Email : <a href="mailto:ramyar4@srmist.edu.in">ramyar4@srmist.edu.in</a>
+                             <br>
+                             <a href="https://www.srmist.edu.in/engineering/eee/faculty/dr-r-ramya">https://www.srmist.edu.in/engineering/eee/faculty/dr-r-ramya</a>
+
+                             </p>
+                        </td>
+                    </tr>
+                   </tbody>
+               </table>
+               <br>
+               <br>
+              <b> Students :</b> <br> <br>
+              <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name of the student</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                    <tr>
+                        <td>Mr. Rahul Raman R</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:rr3647@srmist.edu.in">rr3647@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ms. N. R. S. Lakshanasri</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:ls9971@srmist.edu.in">ls9971@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Rajat Pathak</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:rp3736@srmist.edu.in">rp3736@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Eric Raymund Rex Sylvester</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:es6625@srmist.edu.in">es6625@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Rajeta Sarkar</td>
+                        <td>B.Tech(Electrical and Computer Engineering )
+                            Student</td>
+                            <td>
+                                <a href="mailto:rs7892@srmist.edu.in">rs7892@srmist.edu.in</a>
+                            </td>
+                    </tr>
+                </thead>
+              </table>
+            </p>
+        
+        </div>
+        
+        
+    </div>
   </section>
-  <footer class="text-center py-4" style="background-color: #f9f6f7;">
-    &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
-    <script>
-        document.getElementById("year").innerHTML = new Date().getFullYear();
-    </script>
-  </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

@@ -68,7 +68,7 @@ nav label i{
 nav .slider{
   position: absolute;
   height: 100%;
-  width: 13.3%;
+  width: 33.3%;
   left: 0;
   bottom: 0;
   z-index: 0;
@@ -83,7 +83,7 @@ input[type="radio"]{
   left: 15%;
 }
 #code:checked ~ nav .slider{
-  left: 29%;
+  left: 40%;
 }
 #help:checked ~ nav .slider{
   left: 43.5%;
