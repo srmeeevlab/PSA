@@ -16,20 +16,17 @@
         // ...add an HTML radio button
         answers.push(
           `<label>
-          <input type="checkbox" name="question${questionNumber}" value="${letter}"/>
-
-          ${letter} :
-          ${currentQuestion.answers[letter]}
-        </label>
-        <br/>`
-
+            <input type="radio" name="question${questionNumber}" value="${letter}">
+            ${letter} :
+            ${currentQuestion.answers[letter]}
+          </label>`
         );
       }
 
       // add this question and its answers to the output
       output.push(
         `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join("")} </div><br>`
+        <div class="answers"> ${answers.join("")} </div>`
       );
     });
 
@@ -66,16 +63,12 @@
     });
 
     // show number of correct answers out of total
-    alert(`${numCorrect} out of ${myQuestions.length} is correct`);
-    resultsContainer.innerHTML = `
-    <div class="alert alert-primary center" role="alert">
-    ${numCorrect} out of ${myQuestions.length} is correct
-    <div>`;
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
   }
 
-  const quizContainer = document.getElementById("quiz1");
-  const resultsContainer = document.getElementById("results1");
-  const submitButton = document.getElementById("submit1");
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
 
 
 // Don't touch the above code
