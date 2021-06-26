@@ -1,1 +1,1 @@
-## Power Flow Analysis by Newton Raphson method
+## Power Flow Analysis by Gauss Seidel method

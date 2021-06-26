@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experiment 5</title>
+    <title>Experiment 4</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
@@ -14,7 +14,7 @@
         <div class="container-fluid d-flex justify-content-between">
             <a href="https://www.srmist.edu.in/" target="_blank"><img width="176px" height="59px" class="navbar-brand my-2 p-0" src="images/srmLogo.png"/></a>
             <span class="navbar-text text-center">
-                <strong class="exp-title">Power Flow Analysis by Newton Raphson method</strong>
+                <strong class="exp-title">Power Flow Analysis by Gauss Seidel method</strong>
             </span>
             <button type="button" class="my-auto info" data-bs-toggle="modal" data-bs-target="#helpModal" title="Help"><i class="bi bi-info-circle"></i></button>
         </div>
@@ -62,19 +62,11 @@
                 <div class="modal-body help-body">
                     <strong>To open this menu again click on <i class="bi bi-info-circle"></i> on the top right.</strong><br><br>
                     <div>
-                        Formulae needed for the execution of power flow analysis using Newton Raphson method<br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn1.png" alt="Formula 1"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn2.png" alt="Formula 2"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn3.png" alt="Formula 3"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn4.png" alt="Formula 4"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn5.png" alt="Formula 5"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn6.png" alt="Formula 6"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn7.png" alt="Formula 7"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn8.png" alt="Formula 8"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn9.png" alt="Formula 9"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn10.png" alt="Formula 10"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn11.png" alt="Formula 11"><br>
-                        <img class="img-fluid" src="./images/Exp5_Eqn12.png" alt="Formula 12"><br><br>
+                        Formulae needed for the execution of power flow analysis using Gauss Seidel method<br>
+                        <img class="img-fluid" src="./images/Exp4_Eqn1.png" alt="Formula 1"><br>
+                        <img class="img-fluid" src="./images/Exp4_Eqn2.png" alt="Formula 2"><br>
+                        <img class="img-fluid" src="./images/Exp4_Eqn3.png" alt="Formula 3"><br>
+                        <img class="img-fluid" src="./images/Exp4_Eqn4.png" alt="Formula 4"><br><br>
                         <strong>Losses</strong><br>
                         Power losses in the (i – k)<sup>th</sup> line = S<sub>ik</sub> + S<sub>ki</sub>.<br>
                         Total transmission losses can be computed by summing all the line flows (i.e., S<sub>ik</sub> + S<sub>ki</sub> for all i, k).<br>
@@ -320,9 +312,13 @@
                 <label class="form-label" for="tol">Convergence tolerance for voltage difference in p.u</label>
                 <input class="form-control mb-2"  type="number" name="tol" id="tol" step="any" min="0" value="0.001"> 
             </div>
-            <div class="col-md-12 col-lg-3">
+            <div class="col-md-6 col-lg-1">
                 <label class="form-label" for="mvab">Base MVA</label>
                 <input class="form-control mb-2" type="number" name="mvab" id="mvab" step="any" min="0" value="250"> 
+            </div>
+            <div class="col-md-6 col-lg-2">
+                <label class="form-label" for="acc">Acceleration factor</label>
+                <input class="form-control mb-2" type="number" name="acc" id="acc" step="any" min="0" value="1.3">
             </div>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-success mt-4" type="submit" onclick="startExp()">Next</button>
@@ -331,32 +327,32 @@
     </div>
     <div id="sectionTwo">
         <div class="container mb-5">
-            <h2 class="stepTwo">PV Bus Data</h2>
+            <h2 class="">PV Bus Data</h2>
             <div id="pvMatrix">
     
             </div>
         </div>
         <div class="container mb-5">
-            <h2 class="stepTwo">PQ Bus Data</h2>
+            <h2 class="">PQ Bus Data</h2>
             <div id="pqMatrix" >
     
             </div>
         </div>
         <div class="container mb-5">
-            <h2 class="stepTwo">Transmission Line Data</h2>
+            <h2 class="">Transmission Line Data</h2>
             <div id="tlMatrix">
     
             </div>
         </div>
         <div class="container mb-5">
-            <h2 class="stepTwo">Transformer Data</h2>
+            <h2 class="">Transformer Data</h2>
             <div id="tmMatrix">
     
             </div>
         </div>
     </div>
     <div id="sectionThree" class="container mb-2">
-        <h1 class="stepTwo">Results</h1>
+        <h1 class="">Results</h1>
         <div class="form-check form-switch">
             <input id="isYbusRequired" class="form-check-input" type="checkbox" onchange="toggleCheck()">
             <label class="form-check-label" for="isYbusRequired">Display Ybus</label>
@@ -397,7 +393,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
                 <label class="form-label" for="preact-g-l-bus-pv">Lower limit of reactive power in MVAR</label>
-                <input class="form-control mb-2" type="number" name="preact-g-l-bus-pv" id="preact-g-l-bus-pv" step="any" min="0">
+                <input class="form-control mb-2" type="number" name="preact-g-l-bus-pv" id="preact-g-l-bus-pv" step="any">
             </div>
             <div class="col-md-6 col-lg-4">
                 <label class="form-label" for="vmag-bus-pv">Voltage magnitude in p.u.</label>
@@ -408,7 +404,7 @@
         <div id="pqRow" class="row mb-4 busDetPq">
             <div class="col-md-6 col-lg-2 disableDefault">
                 <label class="form-label" for="id-bus-pq">Id number of the bus</label>
-                <input class="form-control mb-2 " type="number" name="id-bus-pq" id="id-bus-pq" step="1" min="0">
+                <input class="form-control mb-2" type="number" name="id-bus-pq" id="id-bus-pq" step="1" min="0">
             </div>
             <div class="col-md-6 col-lg-4">
                 <label class="form-label" for="pact-d-bus-pq">Active power demand in MW</label>
@@ -446,7 +442,7 @@
                 <input class="form-control mb-2" type="number" name="r-line" id="r-line" step="any" min="0">
             </div>
             <div class="col-md-6 col-lg-4">
-                <label class="form-label" for="x-line">Reactance of the line in p.u (X)</label>
+                <label class="form-label" for="x-line">Reactance of the line in p.u. (X)</label>
                 <input class="form-control mb-2" type="number" name="x-line" id="x-line" step="any">
             </div>
             <div class="col-md-6 col-lg-4">
@@ -487,8 +483,13 @@
             <input class="form-control mb-2" type="number" name="vdel-bus-pv" id="vdel-bus-pv" step="any" min="-90" max="90">
         </div>
     </template>
+    <footer class="text-center py-4" style="background-color: #f9f6f7;">
+        &copy;<span id="year"></span> Made with care by SRMIST-Department of Electrical and Electronics Engineering.
+        <script>
+            document.getElementById("year").innerHTML = new Date().getFullYear();
+        </script>
+    </footer> 
     <script src = "./js/complex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjs@9.3.0/lib/browser/math.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="./js/main.js"></script>
 </body>
