@@ -106,7 +106,14 @@
     <!-- BEGIN TO TOP -->
     <a href="javascript:void(0)" class="back-to-top btn-back-to-top"></a>
     <!-- END TO TOP -->
-
+    <script>
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            $('#headerNavbar').collapse({
+            show: false
+          })
+          } 
+          </script>
     <!-- BEGIN BASE JS -->
     <script src="assets/plugins/pace/pace.min.js"></script>
     <script src="assets/plugins/jquery/jquery.min.js"></script>
@@ -120,13 +127,6 @@
     <script src="assets/js/app.js"></script>
     <script src="assets/js/index.js"></script>
     <!-- END PAGE LEVEL JS -->
-    <script>
-      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-          if (isMobile) {
-            $('#headerNavbar').collapse({
-            show: false
-          })
-          } 
-          </script>
+
   </body>
 </html>
