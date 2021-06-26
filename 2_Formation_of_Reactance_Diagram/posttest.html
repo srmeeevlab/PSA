@@ -101,13 +101,14 @@
       &nbsp;&amp;&nbsp;
       <a class="text-primary font-weight-bold" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"> PALS </a>
     </div> -->
-        <script>
-      if (screen.width<400) {
-        $('#headerNavbar').collapse({
-          show: false
-        })
-      }
-        </script>
+    <script>
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            $('#headerNavbar').collapse({
+            show: false
+          })
+          } 
+          </script>
     <script src="round-template/experiment/posttest.js"></script>
 
     <!-- BEGIN TO TOP -->
