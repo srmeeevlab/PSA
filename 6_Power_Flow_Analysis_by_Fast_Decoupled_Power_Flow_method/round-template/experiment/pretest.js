@@ -16,17 +16,19 @@
         // ...add an HTML radio button
         answers.push(
           `<label>
-            <input type="radio" name="question${questionNumber}" value="${letter}">
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-          </label>`
+          <input type="checkbox" name="question${questionNumber}" value="${letter}"/>
+
+          ${letter} :
+          ${currentQuestion.answers[letter]}
+        </label>
+        <br/>` 
         );
       }
 
       // add this question and its answers to the output
       output.push(
         `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join("")} </div>`
+        <div class="answers"> ${answers.join("")} </div><br>`
       );
     });
 

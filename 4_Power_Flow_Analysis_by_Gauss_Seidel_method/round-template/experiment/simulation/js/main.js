@@ -1,9 +1,9 @@
 const questionArray = [
     [{
-        question:"Gauss Siedel method is ",
+        question:"Which Types of Convergence took place in Newton Raphson method?",
         answer:{
-            a:"Iterative",
-            b:"Non iterative"
+            a:"Quadratic",
+            b:"Linear"
         },
         correctAnswer:"a",
         reason:{
@@ -12,10 +12,10 @@ const questionArray = [
         }
     },
     {
-        question:"Gauss Siedel method is used to solve ",
+        question:"Maximum no. of buses in power system are PQ buses",
         answer:{
-            a:"Non Linear Power System Network",
-            b:"Linear Power System Network"
+            a:"False",
+            b:"True"
         },
         correctAnswer:"b",
         reason:{
@@ -25,36 +25,12 @@ const questionArray = [
         end:true
     }],
     [{
-        question:"PV bus is treated as a PQ bus when Reactive power limit is violated",
+        question:"The state Variables in the Load flow studies are Voltage and real Power",
         answer:{
             a:"True",
             b:"False"
-        },
-        correctAnswer:"a",
-        reason:{
-            a:"",
-            b:""
-        }
-    },
-    {
-        question:"If Voltage Phase angle and Reactive Power are not known then that Bus is called as",
-        answer:{
-            a:"PQ bus",
-            b:"Voltage Controlled Bus "
         },
         correctAnswer:"b",
-        reason:{
-            a:"",
-            b:""
-        }
-    },
-    {
-        question:"If PV bus is having V=1p.u and ∂=0 then it may be called as Slack bus",
-        answer:{
-            a:"True",
-            b:"False"
-        },
-        correctAnswer:"a",
         reason:{
             a:"",
             b:""
@@ -62,22 +38,10 @@ const questionArray = [
         end:true
     }],
     [{
-        question:"Keeping More iterations will leads to more Accurate Power Flow Analysis but Takes too much time",
+        question:"As Compared to Gauss Siedel , Newton Raphson is more efficient and Reliable?",
         answer:{
             a:"True",
             b:"False"
-        },
-        correctAnswer:"a",
-        reason:{
-            a:"",
-            b:""
-        }
-    },
-    {
-        question:"The Quantities defined at the Reference bus are",
-        answer:{
-            a:"V and ∂",
-            b:"Q and ∂"
         },
         correctAnswer:"a",
         reason:{
@@ -92,16 +56,15 @@ const helpModal = new bootstrap.Modal(helpModalEl);
 const questionModalEl = document.getElementById('questionModal');
 const questionModal = new bootstrap.Modal(questionModalEl);
 let train = true;
-
 let busid = 1;compid = 1;
 let showStep = 1;
+const sin = Math.sin;
+const cos = Math.cos;
 const pow = Math.pow;
+const pi =  Math.PI
 function _tr(a,n=4){
     const powOfTen = Math.pow(10,n);
     return Math.round((a + Number.EPSILON) * powOfTen) / powOfTen
-}
-function _n(a){
-    return Number(a);
 }
 function _t(a,n=4){
     return _n(a.toFixed(n));
@@ -114,6 +77,9 @@ function _pC(c){
     else res+=" - j ";
     res+=String(Math.abs(imT));
     return(res);
+}
+function _n(a){
+    return Number(a);
 }
 function questionUser(questionData,arrayIndex,questionIndex){
     document.getElementById("nextQuestion").hidden = false;
@@ -185,115 +151,154 @@ function checkValid(e){
     else pvTot.value=Number(Number(pvTot.value))-(currentTotal-noOfBus);
 }
 function calculate(){
-    if(checkRangeCaller()){
+    if(checkRangeCaller()){ 
         try{
             next(true,2);
             const busMatrix = makeBusMatrix();
             const compMatrix = makeComponentMatrix();
             clearResultYbus();
-            const [yBus,nt,no,a,y,bc] = generateYBus(compMatrix);
-            let yload=0,deltad=[],i,k;
+            const [yBus,nl,nr,a,y,bc] = generateYBus(compMatrix);
             const maxiter = _n(document.getElementById("iter").value);
             const accuracy = _n(document.getElementById("tol").value);
-            const accel = _n(document.getElementById("acc").value);
             const basemva = _n(document.getElementById("mvab").value);
             const nbr = _n(compMatrix.length);
-            const nbus = _n(busMatrix.length);
-            const kb = [] ,vm = [] ,delta = [], pd = [], qd = [],pg = [], qg = [],
-            qmin = [],qmax = [],qsh = [], v=[],p=[],q=[],s=[],dv=[];
-            for(k=0;k<nbus;k+=1){
-                const n = k;
-                kb[n] = busMatrix[k].code;
-                vm[n] = busMatrix[k].vMag;
-                delta[n] = busMatrix[k].delta;
-                pd[n] = busMatrix[k].mwD;
-                qd[n] = busMatrix[k].mvarD;
-                pg[n] = busMatrix[k].mwG;
-                qg[n] = busMatrix[k].mvarG;
-                qmin[n] = busMatrix[k].qMin;
-                qmax[n] = busMatrix[k].qMax;
-                qsh[n] = busMatrix[k].mvarStatic;
+            let ns=0,ng=0,$i,$k,$n;
+            const yload = [],deltad = [],ngs = [],nss = [],ym=[],t=[];
+            const nbus = busMatrix.length;
+            const kb =[],vm = [],delta = [],pd = [],qd = [],pg = [],qg = [],qmin = [],qmax =[],qsh= [],v=[],p=[],q=[],s=[];
+            for($k=0;$k<nbus;$k++){
+                let n = busMatrix[$k].number - 1;
+                kb[n] = busMatrix[$k].code;
+                vm[n] = busMatrix[$k].vMag;
+                delta[n]=busMatrix[$k].delta;
+                pd[n]=busMatrix[$k].mwD;
+                qd[n]=busMatrix[$k].mvarD;
+                pg[n]=busMatrix[$k].mwG;
+                qg[n]=busMatrix[$k].mvarG;
+                qmin[n]=busMatrix[$k].qMin;
+                qmax[n]=busMatrix[$k].qMax;
+                qsh[n]=busMatrix[$k].mvarStatic;
                 if(vm[n]<=0){
-                    vm[n] = 1.0;
+                    vm[n]=1;
                     v[n] = new Complex(1);
-                }else{
-                    delta[n] = Math.PI*delta[n]/180;
+                }
+                else{
+                    delta[n] = (pi/180)*delta[n];
                     v[n] = new Complex(vm[n]).mul(new Complex(Math.cos(delta[n]),Math.sin(delta[n])));
                     p[n] = (pg[n]-pd[n])/basemva;
-                    q[n] = (qg[n]-qd[n] + qsh[n])/basemva;
+                    q[n] = (qg[n]-qd[n]+qsh[n])/basemva;
                     s[n] = new Complex(p[n],q[n]);
                 }
-                dv[n]=0;
             }
-            let num = 0,acurBus =0,converge =1;
-            const vc = [],sc=[];
-            for(k=0;k<nbus;k+=1){
-                vc.push(new Complex());
-                sc.push(new Complex());
+            
+            for($k=0;$k<nbus;$k++){
+                if(kb[$k]==1) ns = ns+1;
+                if(kb[$k]==2) ng = ng+1;
+                ngs[$k] = ng;
+                nss[$k] = ns;
             }
-            let iter=0;
-            maxerror = 10;
-            const dq = [];
-            const dp = [];
-            while(maxerror >= accuracy && iter<maxiter){
-                iter = iter+1;
-                for(i=0;i<nbus;i+=1){
-                    let yv = new Complex(0,0);
-                    for(l=0;l<nbr;l+=1){
-                        if(nt[l]-1 === i){
-                            k=no[l]-1;
-                            yv = yv.add(yBus[i][k].mul(v[k]));
-                        }
-                        else if(no[l]-1 === i){
-                            k=nt[l]-1;
-                            yv = yv.add(yBus[i][k].mul(v[k]));
+            while(ym.length > 0)ym.pop();
+            while(t.length > 0)t.pop();
+            for($i=0;$i<yBus.length;$i++){
+                let $j;
+                const tempYm = [];
+                const tempT = [];
+                for($j=0;$j<yBus.length;$j++){
+                    tempYm.push(yBus[$i][$j].abs());
+                    tempT.push(yBus[$i][$j].arg());
+                }
+                ym.push(tempYm);
+                t.push(tempT);
+            }
+            const  m = 2*nbus-ng-2*ns , A=[],DC=[],J=[];
+            let maxerror = 1,converge = 1,iter =0,DX=[];
+            while(maxerror>=accuracy && iter<maxiter){
+                while(A.length > 0)A.pop();
+                for($i=0;$i<m;$i++){
+                    const Atemp = [];
+                    for($k=0;$k<m;$k++){
+                        Atemp.push(0);
+                    }
+                    A.push(Atemp);
+                }
+                iter+=1;
+                for($n=0;$n<nbus;$n++){
+                    const nn = $n - nss[$n];
+                    const lm = nbus+$n-ngs[$n]-nss[$n]-ns;
+                    let J11=0,J22=0,J33=0,J44=0;
+                    let l,lk,ll;
+                    for($i=0;$i<nbr;$i++){
+                        if(nl[$i] == $n + 1 | nr[$i] == $n + 1){
+                            if(nl[$i] == $n + 1)l = nr[$i] - 1;
+                            if(nr[$i] == $n + 1)l = nl[$i] - 1;
+                            J11 = J11 + vm[$n]*vm[l]*ym[$n][l]*sin(t[$n][l] - delta[$n] + delta[l]);
+                            J33 = J33 + vm[$n]*vm[l]*ym[$n][l]*cos(t[$n][l] - delta[$n] + delta[l]);
+                            if(kb[$n] != 1){
+                                J22 = J22 + vm[l]*ym[$n][l]*cos(t[$n][l] - delta[$n] + delta[l]);
+                                J44 = J44 + vm[l]*ym[$n][l]*sin(t[$n][l] - delta[$n] + delta[l]);
+                            }
+                            if(kb[$n] != 1 && kb[l] !=1){
+                                lk = nbus+l-ngs[l]-nss[l]-ns;
+                                ll = l-nss[l];
+                                A[nn][ll] = -vm[$n]*vm[l]*ym[$n][l]*sin(t[$n][l] - delta[$n] + delta[l]);
+                                if(kb[l] == 0){
+                                    A[nn][lk] = vm[$n]*ym[$n][l]*cos(t[$n][l] - delta[$n] + delta[l]);
+                                }
+                                if(kb[$n] == 0){
+                                    A[lm][ll] = -vm[$n]*vm[l]*ym[$n][l]*cos(t[$n][l] - delta[$n] + delta[l]);
+                                }
+                                if(kb[$n] == 0 && kb[l] == 0){
+                                    A[lm][lk] = -vm[$n]*ym[$n][l]*sin(t[$n][l] - delta[$n] + delta[l]);
+                                }
+                            }
                         }
                     }
-                    sc[i] = v[i].conjugate().mul((yBus[i][i].mul(v[i]).add(yv)));
-                    sc[i] = sc[i].conjugate();
-                    dp[i] = p[i] - sc[i].re;
-                    dq[i] =q[i] - sc[i].im;
-                    if(kb[i]===1){
-                        s[i] = sc[i];
-                        p[i] = sc[i].re;
-                        q[i] = sc[i].im;
-                        dp[i] = 0;
-                        dq[i] = 0;
-                        vc[i] = v[i];
+                    const Pk = pow(vm[$n],2)*ym[$n][$n]*cos(t[$n][$n]) + J33,
+                    Qk = -pow(vm[$n],2)*ym[$n][$n]*sin(t[$n][$n]) - J11;
+                    let qgc;
+                    if(kb[$n] == 1){
+                        p[$n] = Pk;
+                        q[$n] = Qk;
                     }
-                    else if(kb[i] === 2){
-                        q[i] = sc[i].im;
-                        s[i] = new Complex(p[i],q[i]);
-                        if(qmax[i] != 0){
-                            const qgc = q[i]*basemva + qd[i] - qsh[i];
-                            if(Math.abs(dq[i])<=0.005 && iter >= 10){
-                                if(dv[i]<=0.045){
-                                    if(qgc < qmin[i]){
-                                        vm[i] = vm[i] - 0.005;
-                                        dv[i] = dv[i] + 0.005;                        
+                    if(kb[$n] == 2){
+                        q[$n] = Qk;
+                        if(qmax[$n] != 0){
+                            qgc = q[$n]*basemva + qd[$n] - qsh[$n];
+                            if(iter <= 7){
+                                if(iter > 2){
+                                    if(qgc < qmin[$n]){
+                                        vm[$n] = vm[$n] + 0.01;
                                     }
-                                    else if(qgc>qmax[i]){
-                                        vm[i] = vm[i] - 0.005;
-                                        dv[i] = dv[i] + 0.005;
+                                    else if(qgc > qmax[$n]){
+                                        vm[$n] = vm[$n] - 0.01;
                                     }
                                 }
                             }
                         }
                     }
-                    if(kb[i] != 1){
-                        vc[i] = ((s[i].conjugate().div(v[i].conjugate())).sub(yv)).div(yBus[i][i]);
+                    if(kb[$n] != 1){
+                        A[nn][nn] = J11;
+                        DC[nn] = p[$n] - Pk;
                     }
-                    if(kb[i] === 0){
-                        v[i] = v[i].add(vc[i].sub(v[i]));
-                    }
-                    else if(kb[i] === 2){
-                        const vci = vc[i].im;
-                        const vcr = Math.sqrt((vm[i]*vm[i])-(vci*vci));
-                        vc[i] = new Complex(vcr,vci);
-                        v[i] = v[i].add(new Complex(accel).mul(vc[i].sub(v[i])));
+                    if(kb[$n] == 0){
+                        A[nn][lm] = 2*v[$n]*ym[$n][$n]*cos(t[$n][$n]) + J22;
+                        A[lm][nn] = J33;
+                        A[lm][lm] = -2*vm[$n]*ym[$n][$n]*sin(t[$n][$n]) - J44;
+                        DC[lm] = q[$n] - Qk;
                     }
                 }
-                maxerror = Math.max(Math.max(...dp),Math.max(...dq));
+                DX = math.multiply(math.inv(A),math.transpose(DC));
+                for($n=0;$n<nbus;$n++){
+                    const nn = $n-nss[$n];
+                    const lm = nbus + $n - ngs[$n] -nss[$n] -ns;
+                    if(kb[$n]!=1){
+                        delta[$n] = delta[$n] + DX[nn];
+                    }
+                    if(kb[$n]==0){
+                        vm[$n] = vm[$n]+DX[lm];
+                    }
+                }
+                maxerror = Math.max(...DC.map(Math.abs));
                 if(iter == maxiter && maxerror > accuracy){
                     alert(`Warning: Did not converge after ${iter} iiterations`); 
                     converge = 0;
@@ -304,27 +309,30 @@ function calculate(){
                 tempTitle = "<tr><th class='res-title' colspan = '7'>Iterative Solution did not Converge</th></tr>";
             }
             else{
-                tempTitle = "<tr><th class='res-title' colspan = '7'>Power Flow Solution by Gauss-Siedel Method</th></tr>";
+                tempTitle = "<tr><th class='res-title' colspan = '7'>Power Flow Solution by Newton Raphson Method</th></tr>";
             }
-            k=-1;
-            let pgg = [];
-            for(i=0;i<nbus;i+=1){
-                vm[i] = v[i].abs();
-                deltad[i] = (v[i].arg())*180/Math.PI;
-                if(kb[i] == 1){
-                    s[i] = new Complex(p[i],q[i]);
-                    pg[i] = p[i]*basemva +pd[i];
-                    qg[i] = q[i]*basemva + qd[i] - qsh[i];
-                    k+=1;
-                    pgg[k] = pg[i];
+            for($i=0;$i<vm.length;$i++){
+                v[$i] = new Complex(vm[$i]).mul(new Complex(cos(delta[$i]),sin(delta[$i])));
+                deltad[$i] = (delta[$i]*180)/pi;
+            }
+            let k = -1;
+            for($n =0 ;$n<nbus;$n++){
+                if(kb[$n] == 1){
+                    k=k+1;
+                    s[$n] = new Complex(p[$n],q[$n]);
+                    pg[$n] = p[$n]*basemva + pd[$n];
+                    qg[$n] = q[$n]*basemva + qd[$n] - qsh[$n];
                 }
-                else if(kb[i] === 2){
-                    k +=1;
-                    pgg[k] = pg[i];
-                    s[i] = new Complex(p[i],q[i]);
-                    qg[i] = q[i]*basemva + qd[i] - qsh[i];
+                else if(kb[$n] == 2){
+                    k=k+1;
+                    s[$n] = new Complex(p[$n],q[$n]);
+                    qg[$n] = q[$n]*basemva + qd[$n] -qsh[$n];
                 }
-                yload[i] = new Complex(pd[i],qsh[i]-qd[i]).div(new Complex(basemva*pow(vm[i],2)));
+                yload[$n] = new Complex(pd[$n],qsh[$n]-qd[$n]).div(new Complex(basemva*pow(vm[$n],2)));
+            }
+            for($i=0;$i<busMatrix.length;$i+=1){
+                busMatrix[$i].vMag = vm[$i];
+                busMatrix[$i].delta = deltad[$i];
             }
             const sum = function(a,b){return a+b};
             const pgt = pg.reduce(sum,0),
@@ -332,11 +340,6 @@ function calculate(){
             pdt = pd.reduce(sum,0),
             qdt = qd.reduce(sum,0),
             qsht = qsh.reduce(sum,0);
-            for(i=0;i<busMatrix.length;i+=1){
-                busMatrix[i].vMag = vm[i];
-                busMatrix[i].delta = deltad[i];
-            }  
-    
             //Result:
             displayYbus(yBus);
             let table = "<table class='table table-warning table-bordered table-striped' style='border: black;'><thead>";
@@ -357,7 +360,7 @@ function calculate(){
             for(i=0;i<row.length;i+=1)table+=row[i];
             table += "</tbody></table>";
             document.getElementById("result-one").innerHTML = table;
-    
+
             table = "<table class='table table-warning table-bordered table-striped' style='border: black;'><thead>";
             row = [
                 "<tr><th class='res-title' colspan = '8'>Line Flow and Losses</th></tr>",
@@ -376,8 +379,8 @@ function calculate(){
                         row.push(`<tr><th scope="row">${i+1}</th><td></td><td>${_tr(p[i]*basemva)}</td><td>${_tr(q[i]*basemva)}</td><td>${_tr((new Complex(basemva).mul(s[i])).abs())}<td></td><td></td><td></td>`); 
                         busprt = 1;
                     }
-                    if(nt[l] == i+1){
-                        k = no[l]-1;
+                    if(nl[l] == i+1){
+                        k = nr[l]-1;
                         aC = new Complex(a[l]);
                         In = ((v[i].sub(aC.mul(v[k]))).mul(y[l].div(aC.pow(2)))).add((new Complex(bc[l])).div((aC.pow(2)).mul(v[i])));
                         Ik = ((v[k].sub(v[i].div(aC))).mul(y[l])).add((new Complex(bc[l])).mul(v[k]));
@@ -386,8 +389,8 @@ function calculate(){
                         SL = Snk.add(Skn);
                         SLT = SLT.add(SL);
                     }
-                    else if(no[l] === i+1){
-                        k =nt[l]-1;
+                    else if(nr[l] === i+1){
+                        k =nl[l]-1;
                         aC = new Complex(a[l]);
                         In = ((v[i].sub(v[k].div(aC))).mul(y[l])).add((new Complex(bc[l])).mul(v[i]));
                         Ik = ((v[k].sub(aC.mul(v[i]))).mul(y[l].div(aC.pow(2)))).add((new Complex(bc[l])).div((aC.pow(2)).mul(v[k])));
@@ -396,9 +399,9 @@ function calculate(){
                         SL = Snk.add(Skn);
                         SLT = SLT.add(SL);
                     }
-                    if(nt[l] === i+1 || no[l] === i+1){
+                    if(nl[l] === i+1 || nr[l] === i+1){
                         row.push(`<tr><th scope="row"></th><td>${k+1}</td><td>${_tr(Snk.re)}</td><td>${_tr(Snk.im)}</td><td>${_tr(Snk.abs())}<td>${_tr(SL.re)}</td>`);
-                        if(nt[l] === i+1 && a[l] != 1){
+                        if(nl[l] === i+1 && a[l] != 1){
                             row.push(`<td>${_tr(SL.im)}</td><td>${_tr(a[l])}</td></tr>`);
                         }
                         else{
@@ -486,7 +489,7 @@ function makeBusMatrix(){
     const pqRows = document.getElementsByClassName("busDetPq");
     let i;
     const busMatrix = [];
-    const slack = document.getElementById("slack").value;
+    const slack = _n(document.getElementById("slack").value);
     for(i=0;i<pvRows.length;i+=1){
         let code = 2,pvDel=0;
         if(_n(slack) === _n(pvRows[i].querySelector("#id-bus-pv-"+(i+1)).value)){

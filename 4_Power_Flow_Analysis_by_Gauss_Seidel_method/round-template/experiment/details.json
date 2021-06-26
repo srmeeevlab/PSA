@@ -2,7 +2,7 @@
 
   "details": [
       {
-     "Experiment": "Power Flow Analysis by Gauss Seidel method",
+     "Experiment": "Power Flow Analysis by Newton Raphson method",
      "Lab": "Power System Simulation Lab",
      "Discipline": "Electrical and Electronics Engineering",
      "Technology": "HTML,CSS,Javascript"

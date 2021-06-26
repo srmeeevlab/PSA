@@ -16,17 +16,19 @@
         // ...add an HTML radio button
         answers.push(
           `<label>
-            <input type="radio" name="question${questionNumber}" value="${letter}">
-            ${letter} :
-            ${currentQuestion.answers[letter]}
-          </label>`
+          <input type="checkbox" name="question${questionNumber}" value="${letter}"/>
+
+          ${letter} :
+          ${currentQuestion.answers[letter]}
+        </label>
+        <br/>`
         );
       }
 
       // add this question and its answers to the output
       output.push(
         `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join("")} </div>`
+        <div class="answers"> ${answers.join("")} </div><br>`
       );
     });
 
@@ -63,12 +65,16 @@
     });
 
     // show number of correct answers out of total
-    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+    alert(`${numCorrect} out of ${myQuestions.length} is correct`);
+    resultsContainer.innerHTML = `
+    <div class="alert alert-primary center" role="alert">
+    ${numCorrect} out of ${myQuestions.length} is correct
+    <div>`; 
   }
 
-  const quizContainer = document.getElementById("quiz");
-  const resultsContainer = document.getElementById("results");
-  const submitButton = document.getElementById("submit");
+  const quizContainer = document.getElementById("quiz1");
+  const resultsContainer = document.getElementById("results1");
+  const submitButton = document.getElementById("submit1");
 
 
 // Don't touch the above code
@@ -120,7 +126,7 @@
       correctAnswer: "b"
     },
     {
-      question: "A three-bus power system network is shown below, where the diagonal of Ybus matrix are:<br>Y11 = -j12 p.u, Y22 = -j15 p.u, Y33 = -j7 p.u. The p.u. values of the line reactance p, q and r shown in the network are<br><img src=\"./images/Post_Q5.png\"\/>",
+      question: "A three-bus power system network is shown below, where the diagonal of Ybus matrix are:<br>Y11 = -j12 p.u, Y22 = -j15 p.u, Y33 = -j7 p.u. The p.u. values of the line reactance p, q and r shown in the network are<br><img src=\"../Power System Simulation lab/3_Formation of Bus admittance Matrix (without mutual coupling)/experiment/images/Post_Q5.png\"\/>",
       answers: {
         a: "p = -0.2, q = -0.1, r = -0.5",
         b: "p = 0.2, q = 0.1, r = 0.5",       
