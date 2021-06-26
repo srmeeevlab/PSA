@@ -16,19 +16,17 @@
         // ...add an HTML radio button
         answers.push(
           `<label>
-          <input type="checkbox" name="question${questionNumber}" value="${letter}"/>
-
-          ${letter} :
-          ${currentQuestion.answers[letter]}
-        </label>
-        <br/>`
+            <input type="radio" name="question${questionNumber}" value="${letter}">
+            ${letter} :
+            ${currentQuestion.answers[letter]}
+          </label>`
         );
       }
 
       // add this question and its answers to the output
       output.push(
-       `<div class="question"> ${currentQuestion.question} </div>
-       <div class="answers"> ${answers.join("")} </div><br>`
+        `<div class="question"> ${currentQuestion.question} </div>
+        <div class="answers"> ${answers.join("")} </div>`
       );
     });
 
@@ -68,9 +66,9 @@
     resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
   }
 
-  const quizContainer = document.getElementById("quiz1");
-  const resultsContainer = document.getElementById("results1");
-  const submitButton = document.getElementById("submit1");
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
 
 
 // Don't touch the above code
@@ -114,20 +112,20 @@
     {
       question: "Line data of a 2-bus network are:<br><table><thead><tr><th>Element number</th><th>From bus</th><th>To bus</th><th>Impedance</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>1</td><td>j 0.1</td></tr><tr><td>2</td><td>1</td><td>2</td><td>j 0.2</td></tr></tbody></table><br>Its Z<sub>bus</sub> matrix is",
       answers: {
-        a: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A4_A.png\"\/>",
-        b: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A4_B.png\"\/>",
-        c: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A4_C.png\"\/>",
-        d: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A4_D.png\"\/>"
+        a: "<img src=\"./images/Post_A4_A.png\"\/>",
+        b: "<img src=\"./images/Post_A4_B.png\"\/>",
+        c: "<img src=\"./images/Post_A4_C.png\"\/>",
+        d: "<img src=\"./images/Post_A4_D.png\"\/>"
       },
       correctAnswer: "b"
     },
     {
-      question: "The bus admittance matrix of a 3-bus power system with bus 1 as slack bus is<br><img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_Q5.png\"\/><br>The matrix B' is",
+      question: "The bus admittance matrix of a 3-bus power system with bus 1 as slack bus is<br><img src=\"./images/Post_Q5.png\"\/><br>The matrix B' is",
       answers: {
-        a: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A5_A.png\"\/>",
-        b: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A5_B.png\"\/>",
-        c: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A5_C.png\"\/>",
-        d: "<img src=\"../Power System Simulation lab/6_Power Flow Analysis by Fast Decoupled Power Flow method/experiment/images/Post_A5_D.png\"\/>"
+        a: "<img src=\"./images/Post_A5_A.png\"\/>",
+        b: "<img src=\"./images/Post_A5_B.png\"\/>",
+        c: "<img src=\"./images/Post_A5_C.png\"\/>",
+        d: "<img src=\"./images/Post_A5_D.png\"\/>"
       },
       correctAnswer: "a"
     } //Dont add comma here

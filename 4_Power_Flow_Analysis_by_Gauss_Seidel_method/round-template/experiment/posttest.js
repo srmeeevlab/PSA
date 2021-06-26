@@ -16,19 +16,17 @@
         // ...add an HTML radio button
         answers.push(
           `<label>
-          <input type="checkbox" name="question${questionNumber}" value="${letter}"/>
-
-          ${letter} :
-          ${currentQuestion.answers[letter]}
-        </label>
-        <br/>`
+            <input type="radio" name="question${questionNumber}" value="${letter}">
+            ${letter} :
+            ${currentQuestion.answers[letter]}
+          </label>`
         );
       }
 
       // add this question and its answers to the output
       output.push(
         `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join("")} </div><br>` 
+        <div class="answers"> ${answers.join("")} </div>`
       );
     });
 
@@ -65,16 +63,12 @@
     });
 
     // show number of correct answers out of total
-    alert(`${numCorrect} out of ${myQuestions.length} is correct`);
-    resultsContainer.innerHTML = `
-    <div class="alert alert-primary center" role="alert">
-    ${numCorrect} out of ${myQuestions.length} is correct
-    <div>`;
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
   }
 
-  const quizContainer = document.getElementById("quiz1");
-  const resultsContainer = document.getElementById("results1");
-  const submitButton = document.getElementById("submit1");
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
 
 
 // Don't touch the above code
@@ -86,52 +80,52 @@
 
   const myQuestions = [
     {
-      question: "At bus k in a power system, per unit values of the bus voltage and the bus currents are V<sub>k</sub> = 1.1 and I<sub>k</sub> = 0.8  p.u. Then, the per unit value of complex power entering bus k is",
+      question: "Power flow solution is",
       answers: {
-        a: "0.88",
-        b: "0.89",
-        c: "0.82",
-        d: "0.90"
+        a: "steady state solution at normal operating conditions",
+        b: "transient solution at normal operating conditions",
+        c: "steady state solution at no load condition",
+        d: "transient solution at no load condition"
       },
       correctAnswer: "a"
     },
     {
-      question: "The Jacobian matrix computed for NR power flow problem of a 14-bus system is of size 21 x 21. The number of load buses in this power system is",
+      question: "While conducting power flow analysis, for a generator bus, unknown quantities are ",
       answers: {
-        a: "7",
-        b: "8",
-        c: "5",
-        d: "6"
-      },
-      correctAnswer: "b"
-    },
-    {
-      question: "A 14-bus power system has one slack bus and 5 voltage controlled buses. The Jacobian matrix required for NR power flow problem is of size",
-      answers: {
-        a: "8 x 8",
-        b: "16 x 16",
-        c: "18 x 18",
-        d: "21 x 21"
+        a: "Voltage magnitude and voltage phase angle ",
+        b: "Real power injected and reactive power injected",
+        c: "Real power injected and voltage magnitude",
+        d: "Reactive power injected and voltage phase angle"
       },
       correctAnswer: "d"
     },
     {
-      question: "For exact load flow controls on large power systems, the suitable method is",
+      question: "At the end of power flow calculation, power flow S<sub>12</sub>  is obtained as (0.888 – j 0.086) p.u If the line loss in the line 1-2 is (0.014 – j 0.024) p.u then power flow S<sub>21</sub> is",
       answers: {
-        a: "NR method",
-        b: "GS method",
-        c: "Decoupled method",
-        d: "FLDR"
+        a: "(0.902 – j 0.11) p.u",
+        b: "(0.874 – j 0.062) p.u",
+        c: " (- 0.902 + j 0.11) p.u",
+        d: "(-0.874 + j 0.062) p.u"
       },
-      correctAnswer: "a"
+      correctAnswer: "d"
     },
     {
-      question: "The variables specified in Load bus is",
+      question: "In Gauss-Seidel technique of power flow solution, the number of iterations may be compact if the rectification in voltage at each bus in multiplied by",
       answers: {
-        a: "|V|,&#8706;",
-        b: " P, Q",
-        c: " P, |V|",
-        d: "Q, |V|"
+        a: "Gauss Constant",
+        b: "Acceleration constant",
+        c: "Blocking constant",
+        d: " Deceleration constant"
+      },
+      correctAnswer: "b"
+    },
+    {
+      question: "In the flow studies PV bus is treated as PQ when",
+      answers: {
+        a: "Phase angle become high",
+        b: "Reactive power goes beyond",
+        c: "Voltage at the bus becomes high",
+        d: "All of the above"
       },
       correctAnswer: "b"
     } //Dont add comma here

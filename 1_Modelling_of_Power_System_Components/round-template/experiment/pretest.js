@@ -16,19 +16,17 @@
         // ...add an HTML radio button
         answers.push(
           `<label>
-            <input type="checkbox" name="question${questionNumber}" value="${letter}"/>
-
+            <input type="radio" name="question${questionNumber}" value="${letter}">
             ${letter} :
             ${currentQuestion.answers[letter]}
-          </label>
-          <br/>`
+          </label>`
         );
       }
 
       // add this question and its answers to the output
       output.push(
         `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join("")} </div><br>`
+        <div class="answers"> ${answers.join("")} </div>`
       );
     });
 
@@ -65,11 +63,7 @@
     });
 
     // show number of correct answers out of total
-    alert(`${numCorrect} out of ${myQuestions.length} is correct`);
-    resultsContainer.innerHTML = `
-    <div class="alert alert-primary center" role="alert">
-    ${numCorrect} out of ${myQuestions.length} is correct
-    <div>`;
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
   }
 
   const quizContainer = document.getElementById("quiz");
@@ -116,7 +110,7 @@
       correctAnswer: "a"
     },
     {
-      question: "The equivalent circuit for the synchronous motor is<br><img src=\"../Power System Simulation lab/1_Modelling of Power System Components/experiment/images/Pre_Q4.png\"\/>",
+      question: "The equivalent circuit for the synchronous motor is<br><img src=\"./images/Pre_Q4.png\"\/>",
       answers: {
         a: "Option b",
         b: "Option c",
