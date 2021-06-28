@@ -516,7 +516,6 @@ function AnswerInRange(calculated,actual){
     return false;
 }
 function startup(){     
-    document.getElementById("year").innerHTML = new Date().getFullYear();
     const complexTemplate = document.getElementById("complexInput");
     const parent = document.getElementsByClassName("complexInput");
     for(i=0;i<parent.length;i++){
