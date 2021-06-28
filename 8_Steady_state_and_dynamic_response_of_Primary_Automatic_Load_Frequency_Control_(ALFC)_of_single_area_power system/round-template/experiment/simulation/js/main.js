@@ -339,7 +339,6 @@ function checkRange(el){
     return true;
 }
 function startup(){
-    document.getElementById("year").innerHTML = new Date().getFullYear();
     if(screen.width <= 650)alert("Turn into landscape/use a wider display for better experience.");
     simulator.auto = document.getElementById("auto").checked;
     disableInputs(!simulator.auto);

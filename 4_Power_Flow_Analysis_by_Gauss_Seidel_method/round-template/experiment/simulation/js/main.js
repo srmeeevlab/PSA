@@ -705,7 +705,6 @@ function checkRange(el){
     return true;
 }
 function startup(){
-    document.getElementById("year").innerHTML = new Date().getFullYear();
     hideSection(["sectionTwo","sectionThree","controls"],[true,true,true]);
     updateNoOfBus();
     checkValid();
