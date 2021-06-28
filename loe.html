@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#4076e0">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#4076e0">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#4076e0">
+    
+    <title>SRM V-Lab: Home-List of Experiments</title>
+    <link rel="stylesheet" href="Assets/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Assets/css/vlabs-style.css">   
+    <script src="Assets/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="Assets/js/bootstrap.min.js"></script>
+    
+    <!-- END INCLUDE HEADER AND FOOTER -->
+    
+    <!-- BEGIN INCLUDE MARKDOWN FILES USING ZERO MD JS -->
+    <!-- END INCLUDE MARKDOWN FILES USING ZERO MD JS -->    
+  </head>
+  <body class="p-0 container-fluid vlabs-page d-flex flex-column justify-content-between">
+    <header class="vlabs-header sticky-top bg-white">
+      <nav class="p-0 navbar navbar-expand-xxl navbar-light">
+        <a href="https://srmist.edu.in" class="navbar-brand">
+          <img src="assets/images/srm-logo.png" alt="SRM logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavbar" aria-controls="headerNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+    </header>
+
+    
+    <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
+      <div class="row flex-grow-1 px-4">
+        <div id="headerNavbar" class="nav flex-column col col-sm-3 col-lg-2 sidebar collapse show">
+          <a href="index.html" class="py-2">Introduction</a>
+          <a href="#" class="py-2 active">List of Experiments</a>
+          <a href="teamDetails.html" class="py-2">Team Details</a>
+        </div>            
+        <div class="vlabs-page-content col col-sm-7 col-lg-10 pr-5 pb-4">
+          <h3 class="page-name">List of Experiments</h3>
+          <div class="table-responsive">
+            <table class="table my-5 pb-5">
+                <thead>
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Experiment</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td> <a href="1_Modelling_of_Power_System_Components/index.html">Modelling of Power System Components</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td> <a href="2_Formation_of_Reactance_Diagram/index.html">Formation of Reactance Diagram</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>
+                            <a href="3_Formation_of_Bus_admittance_Matrix_(without_mutual_coupling)/index.html"> 
+                           Formation of Bus admittance Matrix (without mutual coupling) </a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>
+                            <a href="4_Power_Flow_Analysis_by_Gauss_Seidel_method/index.html">Power Flow Analysis by Gauss Seidel method</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>   
+                            <a href="5_Power_Flow_Analysis_by_Newton_Raphson_method/index.html">Power Flow Analysis by Newton Raphson method</a> 
+                            </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td> <a href="6_Power_Flow_Analysis_by_Fast_Decoupled_Power_Flow_method/index.html">
+                            Power Flow Analysis by Fast Decoupled Power Flow method
+                         </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>
+                            <a href="7_Stability_analysis_of_Automatic_Voltage_Regulator_(AVR)/index.html">
+                            Stability analysis of Automatic Voltage Regulator (AVR)</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>
+                         <a href="8_Steady_state_and_dynamic_response_of_Primary_Automatic_Load_Frequency_Control_(ALFC)_of_single_area_power system/index.html">   
+                            Steady state and dynamic response of Primary Automatic Load Frequency Control (ALFC) of single area power system</a></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="text-center py-4" style="background-color: #f9f6f7;">
+      Copyright &copy;<span id="year"></span> Department of Electrical and Electronics Engineering, SRM Institute of Science and Technology, Kattankulathur<br>PALS-VLAB initiative, in collaboration with NITK as Technology Partner
+      <script>
+          document.getElementById("year").innerHTML = new Date().getFullYear();
+      </script>
+    </footer>
+    <script>
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+		if (isMobile) {
+      $('#headerNavbar').collapse({
+      show: false
+    })
+		} 
+    </script>
+  </body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vlab</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./Assets/css/style.css">
+    <link rel="stylesheet" href="./Assets/css/style_3.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link rel="stylesheet" href="./Assets/css/msg.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+<style>
+
+
+@media (min-width: 375px ) {
+  .text {
+    font-size: 15px;
+  }
+  .logo{
+    width: 80px;
+    height: 40px;
+  }
+  .navitem{
+      font-size: 8px;
+  }
+  .content{
+      font-size: 10px;
+  }
+  .img{
+      height: 50px;
+
+  }
+}
+@media (min-width:800px){
+    .text{
+        font-size: 28px;
+    }
+    .logo{
+        width: 164px;
+        height: 70px;
+    }
+    .navitem{
+      font-size: 15px;
+  }
+  .content{
+      font-size: 15px;
+  }
+  .img{
+      height: 200px;
+      width: 200px;
+  }
+}
+table{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 col-xs-6 text" style="width: 50%;">
+                    Power System Simulation Lab
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-6" style="width: 50%;">
+                    <img src="./Assets/Images/SRM-logo.png" alt="SRM logo" style="float:right; " class="logo">
+                </div>
+            </div>
+        </header>
+        
+  <hr>
+
+  <input type="radio" name="slider"  id="home">
+  <input type="radio" name="slider" id="blog" checked>
+  <input type="radio" name="slider" id="code">
+ 
+  <nav>
+        <label for="home" class="home"> <span class="navitem">Introduction</span></label>
+        <label for="blog" class="blog"><span class="navitem">List of Experiments</span></label>
+        <label for="code" class="code"><span class="navitem">Team Details</span></label>
+        <div class="slider"></div>
+  </nav>
+  <br>
+  <hr>
+  <section>
+    <div class="content content-1">
+      <div class="title ">Introduction</div>
+      <p>
+        The main objective of this virtual lab is to study and analyze the fundamentals of power system analysis to benefit the students and the research scholar. The outcome of this virtual lab explains the importance of the practical knowledge for the Engineering students. This also invokes the mind of students to analyses the given topic both manually as well as practically. This gives a clear view on the modelling of power system, formation of Y-bus, power flow analysis and explains the practical use. The simulation, functioning, observation, inference, survey, advantages has been completely analyzed in this virtual lab platform.
+        This helps to acquire practical learning experiences in the field of power system by visualizations in digital platform.
+      </p>
+    </div>
+    <div class="content content-2 content">
+      <div class="title">List of Experiments</div>
+      <div class="container  scroll mb-5 pb-5" style="width: 100%;">
+        <div class="container headingBackGround ">
+            <table class="table mb-5 pb-5">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Experiment</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td> <a href="1_Modelling_of_Power_System_Components/index.html">Modelling of Power System Components</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td> <a href="2_Formation_of_Reactance_Diagram/index.html">Formation of Reactance Diagram</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>
+                        <a href="3_Formation_of_Bus_admittance_Matrix_(without_mutual_coupling)/index.html"> 
+                       Formation of Bus admittance Matrix (without mutual coupling) </a></td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>
+                        <a href="4_Power_Flow_Analysis_by_Gauss_Seidel_method/index.html">Power Flow Analysis by Gauss Seidel method</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>   
+                        <a href="5_Power_Flow_Analysis_by_Newton_Raphson_method/index.html">Power Flow Analysis by Newton Raphson method</a> 
+                        </td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td> <a href="6_Power_Flow_Analysis_by_Fast_Decoupled_Power_Flow_method/index.html">
+                        Power Flow Analysis by Fast Decoupled Power Flow method
+                     </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">7</th>
+                    <td>
+                        <a href="7_Stability_analysis_of_Automatic_Voltage_Regulator_(AVR)/index.html">
+                        Stability analysis of Automatic Voltage Regulator (AVR)</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">8</th>
+                    <td>
+                     <a href="8_Steady_state_and_dynamic_response_of_Primary_Automatic_Load_Frequency_Control_(ALFC)_of_single_area_power system/index.html">   
+                        Steady state and dynamic response of Primary Automatic Load Frequency Control (ALFC) of single area power system</a></td>
+                </tr>
+            </tbody>
+            </table>
+        
+        </div>
+     
+    </div>    
+    </div>
+    <div class="content content-3 content">
+        <div class="container scroll">
+            <p>
+              <b> Team Details:</b> <br>
+                Department of Electrical and Electronics Engineering <br>
+                SRM Institute of Science and Technology, Kattankulathur <br>
+                <hr>
+               <b> Faculty:</b> <br> <br>
+               <table class="table">
+                   <tbody>
+                       <tr>
+                           <td>
+                               <img src="https://github.com/srmeeevlab/vlab/blob/main/Assets/faculty_images/Maharajan.png?raw=true" alt="" srcset="" class="img">
+                           </td>
+                        
+                           <td>
+                                <p>
+                                    Dr.D.Maharajan <br>
+                                Assistant Professor <br>
+                                Email : <a href="mailto:maharajd@srmist.edu.in">maharajd@srmist.edu.in</a>
+                                <br>
+                                <a href="https://www.srmist.edu.in/engineering/eee/faculty/d-maharajan">https://www.srmist.edu.in/engineering/eee/faculty/d-maharajan</a>
+
+                                </p>
+                           </td>
+                       </tr>
+                       <tr>
+                        <td>
+                            <img src="https://github.com/srmeeevlab/vlab/blob/main/Assets/faculty_images/usha.png?raw=true" alt="" srcset="" class="img">
+                        </td>
+                     
+                        <td>
+                             <p>
+                                Dr.S.Usha
+                                <br>
+                             Assistant Professor <br>
+                             Email : <a href="mailto:ushas@srmist.edu.in">ushas@srmist.edu.in</a>
+                             <br>
+                             <a href="https://www.srmist.edu.in/engineering/eee/faculty/dr-s-usha">https://www.srmist.edu.in/engineering/eee/faculty/dr-s-usha</a>
+
+                             </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://github.com/srmeeevlab/vlab/blob/main/Assets/faculty_images/Ramya.png?raw=true" alt="" srcset="" class="img">
+                        </td>
+                     
+                        <td>
+                             <p>
+                                Dr.R.Ramya
+                                <br>
+                             Assistant Professor <br>
+                             Email : <a href="mailto:ramyar4@srmist.edu.in">ramyar4@srmist.edu.in</a>
+                             <br>
+                             <a href="https://www.srmist.edu.in/engineering/eee/faculty/dr-r-ramya">https://www.srmist.edu.in/engineering/eee/faculty/dr-r-ramya</a>
+
+                             </p>
+                        </td>
+                    </tr>
+                   </tbody>
+               </table>
+               <br>
+               <br>
+              <b> Students :</b> <br> <br>
+              <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name of the student</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                    <tr>
+                        <td>Mr. Rahul Raman R</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:rr3647@srmist.edu.in">rr3647@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ms. N. R. S. Lakshanasri</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:ls9971@srmist.edu.in">ls9971@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Rajat Pathak</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:rp3736@srmist.edu.in">rp3736@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Eric Raymund Rex Sylvester</td>
+                        <td>B.Tech(EEE) Student</td>
+                        <td>
+                            <a href="mailto:es6625@srmist.edu.in">es6625@srmist.edu.in</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Rajeta Sarkar</td>
+                        <td>B.Tech(Electrical and Computer Engineering )
+                            Student</td>
+                            <td>
+                                <a href="mailto:rs7892@srmist.edu.in">rs7892@srmist.edu.in</a>
+                            </td>
+                    </tr>
+                </thead>
+              </table>
+            </p>
+        
+        </div>
+        
+        
+    </div>
+  </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+</body>
+</html>
